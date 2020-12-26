@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { isEmpty } from '../../../utils/utils'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -11,8 +12,19 @@ const SignUp = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const signUpData = { username, password, confirmPassword }
-        if(password !== confirmPassword) {
-            console.log('passwords do not match')
+
+        if(isEmpty(username))
+            toast.error('Username cannot empty', {
+                position: "top-center",
+                autoClose: 2000,
+            })
+        
+        else if(isEmpty(password) || isEmpty(confirmPassword))
+            toast.error('Password cannot empty', {
+                position: "top-center",
+                autoClose: 2000,
+            })
+        else if(password.trim() !== confirmPassword.trim()) {
             toast.error('Passwords do not match', {
                 position: "top-center",
                 autoClose: 2000,
