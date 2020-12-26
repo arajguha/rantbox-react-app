@@ -8,6 +8,7 @@ const SignUp = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [formSubmitted, setFormSubmitted] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -31,7 +32,10 @@ const SignUp = () => {
             })
         }
         
-        console.log(signUpData)
+        else{
+            console.log(signUpData)
+            setFormSubmitted(true)
+        }
     }
 
     return (
@@ -69,7 +73,7 @@ const SignUp = () => {
                                 onChange={(e) => setConfirmPassword(e.target.value)} 
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Sign Up</button>
+                        <button type="submit" className="btn btn-primary" onClick={handleSubmit} disabled={formSubmitted}>Sign Up</button>
                     </form>
                 </div>
                 <div className="col-xs-2"></div>
