@@ -3,20 +3,18 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
     return (
-        <div className="container-fluid">
-            <ul className="nav navbar-nav">
-                <div className="navbar-header">
-                    <div className="navbar-brand">RantBox</div>
-                </div>
-                <li role="presentation"><Link to="/dashboard">Dashboard</Link></li>
-                <li role="presentation"><Link to="/rants">Your Rants</Link></li>
+        <nav className="nav-extended">
+            <div className="nav-wrapper">
+            <li className="brand-logo"><Link to="/dashboard">RantBox</Link></li>
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><Link to="/rants">Your Rants</Link></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/signin">Sign In</Link></li>
+                <li><Link to="/signup">Sign up</Link></li>
             </ul>
-            <ul className="nav navbar-nav navbar-right">
-                <li role="presentation"><Link to="/about">About</Link></li>
-                <li role="presentation"><Link to="/signin">Sign In</Link></li>
-                <li role="presentation"><Link to="/signup">Sign up</Link></li>
-            </ul>
-        </div>
+            </div>
+        </nav>
     )
 }
 
