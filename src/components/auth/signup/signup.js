@@ -42,41 +42,37 @@ const SignUp = () => {
         <>
             <ToastContainer />
             <div className="container" style={{marginTop: '50px'}}>
-                <div className="col-xs-2"></div>
-                <div className="col-xs-8">
+                <div className="col s2"></div>
+                <div className="col s8">
                     <form>
-                        <div className="form-group">
-                            <label>Username</label>
+                        <div className="input-field">
+                            <label htmlFor="username">Username</label>
                             <input 
-                                type="email" 
-                                className="form-control" 
-                                aria-describedby="emailHelp" 
-                                placeholder="Enter username"
+                                id="username"
+                                type="text"
                                 onChange={(e) => setUsername(e.target.value)} 
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Password</label>
+                        <div className="input-field">
+                            <label htmlFor="password">Password</label>
                             <input 
-                                type="password" 
-                                className="form-control" 
-                                placeholder="Password" 
+                                id="password"
+                                type="password"  
                                 onChange={(e) => setPassword(e.target.value)} 
                             />
                         </div>
-                        <div className="form-group">
-                            <label>Confirm Password</label>
+                        <div className="input-field">
+                            <label htmlFor="confirm_password">Confirm Password</label>
                             <input 
+                                id="confirm_password"
                                 type="password" 
-                                className="form-control" 
-                                placeholder="Confirm Password" 
                                 onChange={(e) => setConfirmPassword(e.target.value)} 
                             />
                         </div>
                         <button type="submit" className="btn btn-primary" onClick={handleSubmit} disabled={formSubmitted}>Sign Up</button>
                     </form>
                 </div>
-                <div className="col-xs-2"></div>
+                <div className="col s2"></div>
             </div>
         </>
     )
