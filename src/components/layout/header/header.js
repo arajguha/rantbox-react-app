@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Route, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class Header extends Component {
 
@@ -8,7 +9,8 @@ class Header extends Component {
         document.addEventListener('DOMContentLoaded', function() {
             const elems = document.querySelectorAll('.sidenav')
             const instances = M.Sidenav.init(elems, {})
-          })
+        })
+        console.log(this.props.auth.isLoggedIn)
     }
 
     render() {
@@ -22,8 +24,9 @@ class Header extends Component {
                             <li><Link to="/dashboard">Dashboard</Link></li>
                             <li><Link to="/rants">Your Rants</Link></li>
                             <li><Link to="/about">About</Link></li>
-                            <li><Link to="/signin">Sign In</Link></li>
-                            <li><Link to="/signup">Sign up</Link></li>
+                            { !this.props.auth.isLoggedIn &&  <li><Link to="/signin">Sign In</Link></li> }
+                            { !this.props.auth.isLoggedIn && <li><Link to="/signup">Sign up</Link></li> }
+                            { this.props.auth.isLoggedIn && <li>Logout</li> }
                         </ul>
                     </div>
                 </nav>
@@ -41,19 +44,10 @@ class Header extends Component {
     }
 }
 
-export default Header
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
 
-/*
-<nav className="nav-extended teal darken-4">
-            <div className="nav-wrapper">
-            <li className="brand-logo hide-on-med-and-down"><Link to="/dashboard">RantBox</Link></li>
-            <ul id="nav-mobile" className="right">
-                <li><Link to="/dashboard">Dashboard</Link></li>
-                <li><Link to="/rants">Your Rants</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/signin">Sign In</Link></li>
-                <li><Link to="/signup">Sign up</Link></li>
-            </ul>
-            </div>
-        </nav>
-*/
+export default connect(mapStateToProps)(Header)

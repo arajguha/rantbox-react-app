@@ -1,3 +1,4 @@
+import actions from './postActionTypes'
 
 const initialState = {
     loading: false,
@@ -7,20 +8,20 @@ const initialState = {
 
 const postsReducer = (state=initialState, action) => {
     switch(action.type) {
-        case FETCH_POSTS:
+        case actions.FETCH_POSTS:
             return {
                 ...state,
                 loading: True
             }
 
-        case FETCH_POSTS_SUCCESS:
+        case actions.FETCH_POSTS_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 posts: action.payload
             }
 
-        case FETCH_POSTS_FAILURE:
+        case actions.FETCH_POSTS_FAILURE:
             return {
                 ...state,
                 loading: false, 
@@ -32,3 +33,5 @@ const postsReducer = (state=initialState, action) => {
 
     }
 }
+
+export default postsReducer
