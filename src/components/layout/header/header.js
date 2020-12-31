@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../../../store/auth/authActions'
 
@@ -14,7 +14,6 @@ class Header extends Component {
     }
 
     render() {
-        
         return (
             <> 
                 <nav>
