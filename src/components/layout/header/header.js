@@ -10,7 +10,6 @@ class Header extends Component {
             const elems = document.querySelectorAll('.sidenav')
             const instances = M.Sidenav.init(elems, {})
         })
-        console.log(this.props.auth.isLoggedIn)
     }
 
     render() {
