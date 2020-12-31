@@ -4,9 +4,17 @@ import axios from 'axios'
 
 export const login = (userData) => {
     return dispatch => {
+        dispatch(loginRequest())
+        
         axios.post('http://localhost:8000/login', userData)
-            .then(data => dispatch(loginSuccess(data.token)))
-            .catch(err => dispatch(loginError(err)))
+            .then(json => dispatch(loginSuccess(json.data.token)))
+            .catch(err => dispatch(loginError(err.message)))
+    }
+}
+
+export const loginRequest = () => {
+    return {
+        type: actions.LOGIN_REQUEST
     }
 }
 

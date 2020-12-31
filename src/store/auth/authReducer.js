@@ -1,5 +1,6 @@
 import actions from './authActionTypes'
 
+
 const initialState = {
     loading: false,
     isLoggedIn: false,

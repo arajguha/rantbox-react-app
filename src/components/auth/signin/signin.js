@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, Route } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+import { login } from '../../../store/auth/authActions'
 
 const SignIn = (props) => {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
+    const loginHandler = (e) => {
+        e.preventDefault()
+        props.login({username, password})
+    }
+
     if(props.auth.isLoggedIn)
-        return (
-            <Route path="/">
-                <Redirect to="/about" />
-            </Route>
-        )
+        return <Redirect to="/about" />
+    
     return (
         
         <div className="container" style={{marginTop: '50px'}}>
@@ -17,13 +23,13 @@ const SignIn = (props) => {
                     <form>
                         <div className="input-field">
                             <label htmlFor="username">Username</label>
-                            <input id="username" type="text"/>
+                            <input id="username" type="text" value={username} onChange={e => setUsername(e.target.value)} />
                         </div>
                         <div className="input-field">
                             <label htmlFor="password">Password</label>
-                            <input id="password" type="password" />
+                            <input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
                         </div>
-                        <button type="submit" className="btn btn-primary">Sign Up</button>
+                        <button type="submit" className="btn btn-primary" onClick={e => loginHandler(e)}>Sign In</button>
                     </form>
                 </div>
             <div className="col s2"></div>
@@ -37,4 +43,11 @@ const mapStateToProps = (state) => {
         auth: state.auth
     }
 }
-export default connect(mapStateToProps, null)(SignIn)
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (userData) => dispatch(login(userData))
+    }
+} 
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
