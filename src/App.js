@@ -4,6 +4,7 @@ import Header from './components/layout/header/header'
 import SignIn from './components/auth/signin/signin'
 import SignUp from './components/auth/signup/signup'
 import Dashboard from './components/layout/dashboard/dashboard'
+import About from './components/layout/dashboard/about'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/dashboard"><Dashboard /></Route>
           <Route path="/signin"><SignIn /></Route>
           <Route path="/signup"><SignUp /></Route>
+          <Route path="/about"><About /></Route>
         </Switch>
       </Router>
     </div>

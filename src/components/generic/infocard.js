@@ -7,13 +7,16 @@ const InfoCard = (props) => {
             <div className="col s12 m6">
                 <div className="card">
                     <div className="card-content">
-                        <span className="card-title"><strong>Log In Required</strong></span>
-                        <p>Please log in to continue. If you are new you can sign up.</p>
+                        <span className="card-title"><strong>{props.title}</strong></span>
+                        <p>{props.text}</p>
                     </div>
-                    <div className="card-action">
-                        <Link to="/signin">Log in</Link>
-                        <Link to="/signup">Sign Up</Link>
-                    </div>
+                    {
+                        props.type !== 'error' &&
+                        <div className="card-action">
+                            <Link to="/signin">Log in</Link>
+                            <Link to="/signup">Sign Up</Link>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import PostCard from '../posts/postCard'
 import InfoCard from '../../generic/infocard'
-import axios from 'axios'
 import { connect } from 'react-redux'
+import { fetchPosts } from '../../../store/posts/postActions'
+import axios from 'axios'
+
 
 const Dashboard = (props) => {
     const [ posts, setPosts ] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:8000/rant-posts/')
-            .then(json => json.data)
-            .then(data => setPosts(data.results))
-            .catch(err => console.log(err.message))
+        console.log('component did mount')
+        if(props.auth.token)
+            props.getPosts(props.auth.token)
     }, [])
 
-    if(!props.auth.isLoggedIn) 
-        return <InfoCard text="Please log in to continue" />
+    useEffect(() => {
+        console.log('posts array set')
+        setPosts(props.posts.postsArray)
+    }, [props.posts.postsArray])
+
 
     const postsArray = posts.map(post => <PostCard key={post.id} title={post.title} text={post.text} />)
     return (
         <div className="row">
+            { !props.auth.isLoggedIn && <InfoCard title="Log In Required" text="Please log in to continue. If you are new you can sign up." /> }
             {postsArray}
         </div>
     )
@@ -27,8 +32,15 @@ const Dashboard = (props) => {
 
 const mapStateToProps = state => {
     return {
-        auth: state.auth
+        auth: state.auth,
+        posts: state.posts
     }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+const mapDispatchToProps = dispatch => {
+    return {
+        getPosts: (token) => dispatch(fetchPosts(token))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

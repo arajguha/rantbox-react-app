@@ -2,23 +2,23 @@ import actions from './postActionTypes'
 
 const initialState = {
     loading: false,
-    posts: [],
+    postsArray: [],
     error: ''
 }
 
 const postsReducer = (state=initialState, action) => {
     switch(action.type) {
-        case actions.FETCH_POSTS:
+        case actions.FETCH_POSTS_REQUEST:
             return {
                 ...state,
-                loading: True
+                loading: true
             }
 
         case actions.FETCH_POSTS_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                posts: action.payload
+                postsArray: action.payload
             }
 
         case actions.FETCH_POSTS_FAILURE:

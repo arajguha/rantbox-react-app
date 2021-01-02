@@ -13,7 +13,7 @@ const SignIn = (props) => {
     }
 
     if(props.auth.isLoggedIn)
-        return <Redirect to="/about" />
+        return <Redirect to="/dashboard" />
     
     return (
         

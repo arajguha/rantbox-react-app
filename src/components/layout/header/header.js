@@ -39,7 +39,6 @@ class Header extends Component {
                     { !this.props.auth.isLoggedIn && <li><Link to="/signup">Sign up</Link></li> }
                     { this.props.auth.isLoggedIn && <li><Link to="/signin" onClick={this.props.logout}>Logout</Link></li> }
                 </ul>
-            
             </>
         )
     }
