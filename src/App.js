@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import Header from './components/layout/header/header'
 import SignIn from './components/auth/signin/signin'
 import SignUp from './components/auth/signup/signup'
@@ -12,6 +12,7 @@ const App = () => {
       <Router>
         <Header />
         <Switch>
+          <Route exact path="/"><Redirect to="/dashboard" /></Route>
           <Route path="/dashboard"><Dashboard /></Route>
           <Route path="/signin"><SignIn /></Route>
           <Route path="/signup"><SignUp /></Route>
