@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { login } from '../../../store/auth/authActions'
+import { clearError, login } from '../../../store/auth/authActions'
+
 
 const SignIn = (props) => {
     const [username, setUsername] = useState('')
@@ -9,14 +10,20 @@ const SignIn = (props) => {
     const [message, setMessage] = useState('')
 
     useEffect(() => {
+        props.clearError()
+    }, [])
+
+    useEffect(() => {
         setMessage(props.auth.error)
     }, [props.auth.error])
 
+
     const loginHandler = (e) => {
         e.preventDefault()
-        if(username.trim() == '' || password.trim() == '')
+        if(username.trim() === '' || password.trim() === ''){
             setMessage('username or password cannot be blank')
-        else
+        }
+        else 
             props.login({username, password})
     }
 
@@ -55,7 +62,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (userData) => dispatch(login(userData))
+        login: (userData) => dispatch(login(userData)),
+        clearError: () => dispatch(clearError())
     }
 } 
 

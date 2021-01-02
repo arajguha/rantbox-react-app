@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../../../store/auth/authActions'
 
@@ -21,23 +21,23 @@ class Header extends Component {
                         <a href="#" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         <a href="#" className="brand-logo">RantBox</a>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
-                            <li><Link to="/dashboard">Dashboard</Link></li>
-                            <li><Link to="/rants">Your Rants</Link></li>
-                            <li><Link to="/about">About</Link></li>
-                            { !this.props.auth.isLoggedIn &&  <li><Link to="/signin">Sign In</Link></li> }
-                            { !this.props.auth.isLoggedIn && <li><Link to="/signup">Sign up</Link></li> }
-                            { this.props.auth.isLoggedIn && <li><Link to="/signin" onClick={this.props.logout}>Logout</Link></li> }
+                            <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                            <li><NavLink to="/rants">Your Rants</NavLink></li>
+                            <li><NavLink to="/about">About</NavLink></li>
+                            { !this.props.auth.isLoggedIn &&  <li><NavLink to="/signin">Sign In</NavLink></li> }
+                            { !this.props.auth.isLoggedIn && <li><NavLink to="/signup">Sign up</NavLink></li> }
+                            { this.props.auth.isLoggedIn && <li><NavLink to="/signin" onClick={this.props.logout}>Logout</NavLink></li> }
                         </ul>
                     </div>
                 </nav>
 
                 <ul id="slide-out" className="sidenav">
-                    <li><Link to="/dashboard">Dashboard</Link></li>
-                    <li><Link to="/rants">Your Rants</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    { !this.props.auth.isLoggedIn &&  <li><Link to="/signin">Sign In</Link></li> }
-                    { !this.props.auth.isLoggedIn && <li><Link to="/signup">Sign up</Link></li> }
-                    { this.props.auth.isLoggedIn && <li><Link to="/signin" onClick={this.props.logout}>Logout</Link></li> }
+                    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                    <li><NavLink to="/rants">Your Rants</NavLink></li>
+                    <li><NavLink to="/about">About</NavLink></li>
+                    { !this.props.auth.isLoggedIn &&  <li><NavLink to="/signin">Sign In</NavLink></li> }
+                    { !this.props.auth.isLoggedIn && <li><NavLink to="/signup">Sign up</NavLink></li> }
+                    { this.props.auth.isLoggedIn && <li><NavLink to="/signin" onClick={this.props.logout}>Logout</NavLink></li> }
                 </ul>
             </>
         )

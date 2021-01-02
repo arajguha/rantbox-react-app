@@ -40,3 +40,9 @@ export const logout = () => {
         type: actions.LOGOUT
     }
 }
+
+export const clearError = () => {
+    return {
+        type: actions.CLEAR_ERROR
+    }
+}
