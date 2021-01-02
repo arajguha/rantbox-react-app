@@ -3,7 +3,6 @@ import PostCard from '../posts/postCard'
 import InfoCard from '../../generic/infocard'
 import { connect } from 'react-redux'
 import { fetchPosts } from '../../../store/posts/postActions'
-import axios from 'axios'
 
 
 const Dashboard = (props) => {
