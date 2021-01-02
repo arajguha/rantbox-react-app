@@ -2,16 +2,17 @@ import actions from './postActionTypes'
 import axios from 'axios'
 
 
-export const fetchPosts = (token) => {
+export const fetchPosts = (token, link=null) => {
     return dispatch => {
         dispatch(fetchPostsRequest())
+        const url = link ? link : 'http://localhost:8000/rant-posts/'
         axios
-            .get('http://localhost:8000/rant-posts/', {
+            .get(url, {
                 'headers': { 'Authorization': `Token ${token}` }
             })
             .then(json => {
-                console.log(json.data)
-                dispatch(fetchPostsSuccess(json.data.results))
+                console.log('postActions', json.data)
+                dispatch(fetchPostsSuccess(json.data))
             })
             .catch(err => {
                 console.log(err)
@@ -26,10 +27,10 @@ export const fetchPostsRequest = () => {
     }
 }
 
-export const fetchPostsSuccess = (posts) => {
+export const fetchPostsSuccess = (response) => {
     return {
         type: actions.FETCH_POSTS_SUCCESS,
-        payload: posts
+        payload: response
     }
 }
 

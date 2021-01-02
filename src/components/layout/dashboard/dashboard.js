@@ -7,24 +7,37 @@ import { fetchPosts } from '../../../store/posts/postActions'
 
 const Dashboard = (props) => {
     const [ posts, setPosts ] = useState([])
+    const [prev, setPrev] = useState(null)
+    const [next, setNext] = useState(null)
 
     useEffect(() => {
         console.log('component did mount')
-        if(props.auth.token)
+        if(props.auth.token){
+            console.log('get request called')
             props.getPosts(props.auth.token)
+        }
     }, [])
 
     useEffect(() => {
-        console.log('posts array set')
-        setPosts(props.posts.postsArray)
-    }, [props.posts.postsArray])
+        if(props.posts.response.results) {
+            setPosts(props.posts.response.results)
+            setPrev(props.posts.response.previous)
+            setNext(props.posts.response.next)
+        }
+    }, [props.posts])
 
 
     const postsArray = posts.map(post => <PostCard key={post.id} title={post.title} text={post.text} />)
     return (
         <div className="row">
-            { !props.auth.isLoggedIn && <InfoCard title="Log In Required" text="Please log in to continue. If you are new you can sign up." /> }
+            { !props.auth.isLoggedIn && 
+                <InfoCard title="Log In Required" text="Please log in to continue. If you are new you can sign up." /> 
+            }
             {postsArray}
+            <ul className="pagination">
+                { prev && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, prev)}><i className="material-icons">chevron_left</i></li> }
+                { next && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, next)}><a href="#!"><i className="material-icons">chevron_right</i></a></li> }
+            </ul>
         </div>
     )
 }
@@ -38,7 +51,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getPosts: (token) => dispatch(fetchPosts(token))
+        getPosts: (token, next) => dispatch(fetchPosts(token, next))
     }
 }
 

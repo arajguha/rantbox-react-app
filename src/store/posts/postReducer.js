@@ -2,7 +2,7 @@ import actions from './postActionTypes'
 
 const initialState = {
     loading: false,
-    postsArray: [],
+    response: {},
     error: ''
 }
 
@@ -18,7 +18,7 @@ const postsReducer = (state=initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                postsArray: action.payload
+                response: action.payload
             }
 
         case actions.FETCH_POSTS_FAILURE:
