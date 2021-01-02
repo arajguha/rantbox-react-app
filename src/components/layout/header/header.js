@@ -31,7 +31,7 @@ class Header extends Component {
                     </div>
                 </nav>
 
-                <ul id="slide-out" className="sidenav teal lighten-4">
+                <ul id="slide-out" className="sidenav">
                     <li><Link to="/dashboard">Dashboard</Link></li>
                     <li><Link to="/rants">Your Rants</Link></li>
                     <li><Link to="/about">About</Link></li>
