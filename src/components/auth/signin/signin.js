@@ -6,10 +6,18 @@ import { login } from '../../../store/auth/authActions'
 const SignIn = (props) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [message, setMessage] = useState('')
+
+    useEffect(() => {
+        setMessage(props.auth.error)
+    }, [props.auth.error])
 
     const loginHandler = (e) => {
         e.preventDefault()
-        props.login({username, password})
+        if(username.trim() == '' || password.trim() == '')
+            setMessage('username or password cannot be blank')
+        else
+            props.login({username, password})
     }
 
     if(props.auth.isLoggedIn)
@@ -33,6 +41,7 @@ const SignIn = (props) => {
                     </form>
                 </div>
             <div className="col s2"></div>
+            { message !== '' && <p style={{'color': 'red'}}>{message}</p> }
         </div>
     
     )

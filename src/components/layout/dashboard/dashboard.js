@@ -26,18 +26,26 @@ const Dashboard = (props) => {
         }
     }, [props.posts])
 
+    if(!props.auth.isLoggedIn) {
+        return <InfoCard title="Log In Required" text="Please log in to continue. If you are new you can sign up." /> 
+    }    
 
     const postsArray = posts.map(post => <PostCard key={post.id} title={post.title} text={post.text} />)
     return (
         <div className="row">
-            { !props.auth.isLoggedIn && 
-                <InfoCard title="Log In Required" text="Please log in to continue. If you are new you can sign up." /> 
-            }
-            {postsArray}
-            <ul className="pagination">
-                { prev && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, prev)}><i className="material-icons">chevron_left</i></li> }
-                { next && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, next)}><a href="#!"><i className="material-icons">chevron_right</i></a></li> }
-            </ul>
+            <div className="col s7">
+                {postsArray}
+                <ul className="pagination">
+                    { prev && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, prev)}><i className="material-icons">chevron_left</i></li> }
+                    { next && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, next)}><a href="#!"><i className="material-icons">chevron_right</i></a></li> }
+                </ul>
+            </div>
+            <div className="col s1"></div>
+            <div className="col s4">
+                <div className="card-panel">
+                    <span><strong>Featured Section</strong></span>
+                </div>
+            </div>
         </div>
     )
 }

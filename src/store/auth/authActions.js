@@ -8,7 +8,10 @@ export const login = (userData) => {
         
         axios.post('http://localhost:8000/login', userData)
             .then(json => dispatch(loginSuccess(json.data.token)))
-            .catch(err => dispatch(loginError(err.message)))
+            .catch(err =>{ 
+                dispatch(loginError(err.response.data.non_field_errors))
+                //console.log(err.response.data.non_field_errors)
+            })
     }
 }
 

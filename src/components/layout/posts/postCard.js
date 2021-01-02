@@ -2,7 +2,7 @@ import React from 'react'
 
 const PostCard = (props) => {
     return (
-            <div className="col s12 m6">
+            <div className="col s12 m12">
                 <div className="card">
                     <div className="card-content">
                         <span className="card-title"><strong>{props.title}</strong></span>
