@@ -59,7 +59,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getPosts: (token, next) => dispatch(fetchPosts(token, next))
+        getPosts: (token, url) => dispatch(fetchPosts(token, url))
     }
 }
 
