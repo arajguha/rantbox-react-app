@@ -41,7 +41,7 @@ const SignIn = (props) => {
                     </form>
                 </div>
             <div className="col s2"></div>
-            { message !== '' && <p style={{'color': 'red'}}>{message}</p> }
+            { message !== '' && <p style={{'color': 'red'}}><strong>{message}</strong></p> }
         </div>
     
     )
