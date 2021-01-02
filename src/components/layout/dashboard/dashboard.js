@@ -3,10 +3,11 @@ import PostCard from '../posts/postCard'
 import InfoCard from '../../generic/infocard'
 import { connect } from 'react-redux'
 import { fetchPosts } from '../../../store/posts/postActions'
+import CreatePost from '../posts/createPost'
 
 
 const Dashboard = (props) => {
-    const [ posts, setPosts ] = useState([])
+    const [posts, setPosts ] = useState([])
     const [prev, setPrev] = useState(null)
     const [next, setNext] = useState(null)
 
@@ -32,13 +33,15 @@ const Dashboard = (props) => {
 
     const postsArray = posts.map(post => <PostCard key={post.id} title={post.title} text={post.text} />)
     return (
+        <>
+        <CreatePost />
         <div className="row">
             <div className="col m7 s12">
-                {postsArray}
                 <ul className="pagination">
                     { prev && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, prev)}><i className="material-icons">chevron_left</i></li> }
                     { next && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, next)}><a href="#!"><i className="material-icons">chevron_right</i></a></li> }
                 </ul>
+                {postsArray}
             </div>
             <div className="col m1 s12"></div>
             <div className="col m4 s12">
@@ -47,6 +50,7 @@ const Dashboard = (props) => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
