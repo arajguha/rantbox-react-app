@@ -3,6 +3,8 @@ import Loader from '../../generic/loader'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
+import { feelingsDict } from '../../../utils/utils'
 import 'react-toastify/dist/ReactToastify.css'
 
 
@@ -24,6 +26,7 @@ const PostDetail = (props) => {
 
     useEffect(() => {
         setLoading(true)
+        console.log(props)
 
         axios
             .get(`http://localhost:8000/rant-posts/${props.match.params.id}/`, {
@@ -46,19 +49,22 @@ const PostDetail = (props) => {
             { loading && <Loader type='linear' />}
             <ToastContainer />
             <div className="container">
-                <div className="row">
-                    <div className="col s11">
-                        <div className="card">
-                            <span className="card-title">{rantPost.title}</span>
-                            <div className="card-content">
-                                <p>{rantPost.text}</p>
+            <div className="row">
+                <div className="col s10">
+                    <div className="card">
+                        <div className="card-content">
+                            <span className="card-title"><strong>{rantPost.title}</strong></span>
+                            <div className="chip">
+                                {feelingsDict[rantPost.feeling_level]}
                             </div>
-                            <div className="card-content">
-                                <p>{rantPost.feeling_level}</p>
-                            </div>
+                        </div>
+                        <div className="card-content">
+                            <p>{rantPost.text}</p>
                         </div>
                     </div>
                 </div>
+            </div>
+                <Link to="/dashboard"><i className="material-icons">chevron_left</i></Link>
             </div>
 
         </div>

@@ -60,7 +60,7 @@ const Dashboard = (props) => {
                         }
                         { next && 
                             <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, next)}>
-                                 <a href="#!"><i className="material-icons">chevron_right</i></a>
+                                <i className="material-icons">chevron_right</i>
                             </li> 
                         }
                     </ul>
