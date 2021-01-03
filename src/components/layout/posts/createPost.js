@@ -1,14 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { isEmpty } from '../../../utils/utils'
 import { ToastContainer, toast } from 'react-toastify'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import Loader from '../../generic/loader'
 import 'react-toastify/dist/ReactToastify.css'
+import axios from 'axios'
 
-
-const CreatePost = () => {
+ 
+const CreatePost = (props) => {
     const [title, setTitle] = useState('')
     const [feeling, setFeeling] = useState('')
     const [body, setBody] = useState('')
+    const [message, setMessage] = useState('')
+    const [loading, setLoading] = useState(false)
 
+ 
+    useEffect(() => {
+        if(!isEmpty(message))
+            toast.error(message, {
+                position: "top-center",
+                autoClose: 2000,
+            })
+    }, [message])
+
+    
     const handleSubmit = (e) => {
         e.preventDefault()
         const postData = {
@@ -26,10 +42,34 @@ const CreatePost = () => {
         }
 
         console.log(postData)
+        
+        setLoading(true)
+        axios
+            .post('http://localhost:8000/rant-posts/', postData, {
+                'headers': { 'Authorization': `Token ${props.auth.token}` }
+            })
+            .then(res => {
+                console.log(res)
+                setMessage(res.statusText)
+            })
+            .catch(err => {
+                console.log(err.response)
+                setMessage(err.message)
+            })
+
+        setLoading(false)
+        setTitle('')
+        setBody('')
+        setFeeling('')
     }
+
+    if(!props.auth.isLoggedIn)
+        return <Redirect to="/dashboard" />
+
 
     return (
         <>  
+            { loading && <Loader type="linear" />}
             <ToastContainer />
             <div className="container" style={{'marginTop': '30px', 'marginBottom': '30px'}}>
                 <div className="card">
@@ -59,14 +99,14 @@ const CreatePost = () => {
                         <div className="card-action">
                             <label className="card-title"><strong>How are you feeling?</strong></label>
                             <div className="input-field col s12">
-                                <select className="browser-default" defaultValue="" onChange={(e) => setFeeling(e.target.value)} >
+                                <select className="browser-default" defaultValue={feeling} onChange={(e) => setFeeling(e.target.value)} >
                                     <option value="" disabled>Choose</option>
-                                    <option value="Very Sad">Very Sad</option>
-                                    <option value="Sad">Sad</option>
-                                    <option value="Neutral">Neutral</option>
-                                    <option value="Pissed">Pissed</option>
-                                    <option value="Extremely Pissed">Extremely Pissed</option>
-                                    <option value="Fucking Furious">Fucking Furious</option>
+                                    <option value="VS">Very Sad</option>
+                                    <option value="S">Sad</option>
+                                    <option value="N">Neutral</option>
+                                    <option value="P">Pissed</option>
+                                    <option value="EP">Extremely Pissed</option>
+                                    <option value="FF">Fucking Furious</option>
                                 </select>
                             </div>
                         </div>
@@ -82,5 +122,11 @@ const CreatePost = () => {
     )
 }
 
-export default CreatePost
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(CreatePost)
 

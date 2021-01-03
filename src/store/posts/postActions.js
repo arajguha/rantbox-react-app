@@ -18,6 +18,7 @@ export const fetchPosts = (token, link=null) => {
                 console.log(err)
                 dispatch(fetchPostsFailure(err))
             })
+            .catch(() => dispatch(fetchPostsFailure('some error occured')))
     }
 }
 

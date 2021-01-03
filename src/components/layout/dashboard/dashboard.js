@@ -3,7 +3,7 @@ import PostCard from '../posts/postCard'
 import InfoCard from '../../generic/infocard'
 import { connect } from 'react-redux'
 import { fetchPosts } from '../../../store/posts/postActions'
-import CreatePost from '../posts/createPost'
+import { Link } from 'react-router-dom'
 import Loader from '../../generic/loader'
 
 
@@ -39,7 +39,16 @@ const Dashboard = (props) => {
     const postsArray = posts.map(post => <PostCard key={post.id} title={post.title} text={post.text} />)
     return (
         <>
-            <CreatePost />
+            <div className="row">
+                <div className="col s12">
+                    <div className="card">
+                        <div className="card-content">
+                            <span className="card-title"><strong>Want to create your own rant ?</strong></span>
+                            <Link to="create-rant/"><strong>Yes Please</strong></Link>
+                        </div>
+                    </div>
+                </div>
+             </div>
             { props.posts.loading && <Loader /> }
             <div className="row">
                 <div className="col m7 s12">

@@ -5,6 +5,8 @@ import SignIn from './components/auth/signin/signin'
 import SignUp from './components/auth/signup/signup'
 import Dashboard from './components/layout/dashboard/dashboard'
 import About from './components/layout/dashboard/about'
+import CreatePost from './components/layout/posts/createPost'
+
 
 const App = () => {
   return (
@@ -17,10 +19,12 @@ const App = () => {
           <Route path="/signin"><SignIn /></Route>
           <Route path="/signup"><SignUp /></Route>
           <Route path="/about"><About /></Route>
+          <Route path="/create-rant"><CreatePost /></Route>
         </Switch>
       </Router>
     </div>
   )
 }
+
 
 export default App
