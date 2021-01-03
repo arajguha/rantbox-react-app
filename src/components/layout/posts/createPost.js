@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 const CreatePost = () => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
+    const [feeling, setFeeling] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -38,7 +39,7 @@ const CreatePost = () => {
                     <div className="card-action">
                         <label className="card-title"><strong>How are you feeling?</strong></label>
                         <div className="input-field col s12">
-                            <select className="browser-default" defaultValue="">
+                            <select className="browser-default" defaultValue="" onChange={(e) => setFeeling(e.target.value)} >
                                 <option value="" disabled>Choose</option>
                                 <option value="Very Sad">Very Sad</option>
                                 <option value="Sad">Sad</option>

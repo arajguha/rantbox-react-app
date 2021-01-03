@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const InfoCard = (props) => {
     return (
         <div className="row">
-            <div className="col s12 m6">
+            <div className="col s12">
                 <div className="card">
                     <div className="card-content">
                         <span className="card-title"><strong>{props.title}</strong></span>

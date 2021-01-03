@@ -6,6 +6,7 @@ import { fetchPosts } from '../../../store/posts/postActions'
 import CreatePost from '../posts/createPost'
 import Loader from '../../generic/loader'
 
+
 const Dashboard = (props) => {
     const [posts, setPosts ] = useState([])
     const [prev, setPrev] = useState(null)
@@ -28,7 +29,11 @@ const Dashboard = (props) => {
     }, [props.posts])
 
     if(!props.auth.isLoggedIn) {
-        return <InfoCard title="Log In Required" text="Please log in to continue. If you are new you can sign up." /> 
+        return ( 
+            <div className="container">
+                <InfoCard title="Log In Required" text="Please log in to continue. If you are new you can sign up." /> 
+            </div>
+        )
     }    
 
     const postsArray = posts.map(post => <PostCard key={post.id} title={post.title} text={post.text} />)
