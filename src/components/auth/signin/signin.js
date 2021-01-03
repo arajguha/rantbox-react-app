@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { clearError, login } from '../../../store/auth/authActions'
+import Loader from '../../generic/loader'
 
 
 const SignIn = (props) => {
@@ -14,6 +15,7 @@ const SignIn = (props) => {
     }, [])
 
     useEffect(() => {
+        //console.log(props.auth.error)
         setMessage(props.auth.error)
     }, [props.auth.error])
 
@@ -33,6 +35,7 @@ const SignIn = (props) => {
     return (
         
         <div className="container" style={{marginTop: '50px'}}>
+            { props.auth.loading && <Loader />}
             <div className="col s2"></div>
                 <div className="col s8">
                     <form>
