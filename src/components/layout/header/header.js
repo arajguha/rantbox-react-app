@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../../../store/auth/authActions'
 
+
 class Header extends Component {
 
     componentDidMount() {

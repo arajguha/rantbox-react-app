@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 
 const CreatePost = () => {
     const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
     const [feeling, setFeeling] = useState('')
+    const [body, setBody] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -34,6 +34,7 @@ const CreatePost = () => {
                                 value={body} onChange={e => setBody(e.target.value)}
                             ></textarea>
                         </div>
+
                     </div>
 
                     <div className="card-action">
@@ -62,3 +63,4 @@ const CreatePost = () => {
 }
 
 export default CreatePost
+
