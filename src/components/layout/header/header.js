@@ -27,7 +27,9 @@ class Header extends Component {
                             <li><NavLink to="/about">About</NavLink></li>
                             { !this.props.auth.isLoggedIn &&  <li><NavLink to="/signin">Sign In</NavLink></li> }
                             { !this.props.auth.isLoggedIn && <li><NavLink to="/signup">Sign up</NavLink></li> }
-                            { this.props.auth.isLoggedIn && <li><NavLink to="/signin" onClick={this.props.logout}>Logout</NavLink></li> }
+                            { this.props.auth.isLoggedIn && 
+                                <li><NavLink to="/signin" onClick={this.props.logout}>Logout</NavLink></li> 
+                            }
                         </ul>
                     </div>
                 </nav>

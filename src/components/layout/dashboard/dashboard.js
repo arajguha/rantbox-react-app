@@ -38,7 +38,7 @@ const Dashboard = (props) => {
 
     const postsArray = posts.map(post => <PostCard key={post.id} title={post.title} text={post.text} />)
     return (
-        <>
+        <>  
             <div className="row">
                 <div className="col s12">
                     <div className="card">
@@ -53,8 +53,16 @@ const Dashboard = (props) => {
             <div className="row">
                 <div className="col m7 s12">
                     <ul className="pagination">
-                        { prev && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, prev)}><i className="material-icons">chevron_left</i></li> }
-                        { next && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, next)}><a href="#!"><i className="material-icons">chevron_right</i></a></li> }
+                        { prev && 
+                            <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, prev)}>
+                                    <i className="material-icons">chevron_left</i>
+                            </li> 
+                        }
+                        { next && 
+                            <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, next)}>
+                                 <a href="#!"><i className="material-icons">chevron_right</i></a>
+                            </li> 
+                        }
                     </ul>
                     {postsArray}
                 </div>

@@ -14,7 +14,7 @@ const CreatePost = (props) => {
     const [body, setBody] = useState('')
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
-
+    const [created, setCreated] = useState(false)
  
     useEffect(() => {
         if(!isEmpty(message))
@@ -24,7 +24,7 @@ const CreatePost = (props) => {
             })
     }, [message])
 
-    
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const postData = {
@@ -51,6 +51,7 @@ const CreatePost = (props) => {
             .then(res => {
                 console.log(res)
                 setMessage(res.statusText)
+                setCreated(true)
             })
             .catch(err => {
                 console.log(err.response)
@@ -66,6 +67,10 @@ const CreatePost = (props) => {
     if(!props.auth.isLoggedIn)
         return <Redirect to="/dashboard" />
 
+    if(created) {
+        console.log('created')
+        return <Redirect to="/rants" />
+    }
 
     return (
         <>  
@@ -99,7 +104,7 @@ const CreatePost = (props) => {
                         <div className="card-action">
                             <label className="card-title"><strong>How are you feeling?</strong></label>
                             <div className="input-field col s12">
-                                <select className="browser-default" defaultValue={feeling} onChange={(e) => setFeeling(e.target.value)} >
+                                <select className="browser-default" value={feeling} onChange={(e) => setFeeling(e.target.value)} >
                                     <option value="" disabled>Choose</option>
                                     <option value="VS">Very Sad</option>
                                     <option value="S">Sad</option>
