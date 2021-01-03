@@ -4,7 +4,7 @@ import InfoCard from '../../generic/infocard'
 import { connect } from 'react-redux'
 import { fetchPosts } from '../../../store/posts/postActions'
 import CreatePost from '../posts/createPost'
-
+import Loader from '../../generic/loader'
 
 const Dashboard = (props) => {
     const [posts, setPosts ] = useState([])
@@ -34,22 +34,23 @@ const Dashboard = (props) => {
     const postsArray = posts.map(post => <PostCard key={post.id} title={post.title} text={post.text} />)
     return (
         <>
-        <CreatePost />
-        <div className="row">
-            <div className="col m7 s12">
-                <ul className="pagination">
-                    { prev && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, prev)}><i className="material-icons">chevron_left</i></li> }
-                    { next && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, next)}><a href="#!"><i className="material-icons">chevron_right</i></a></li> }
-                </ul>
-                {postsArray}
-            </div>
-            <div className="col m1 s12"></div>
-            <div className="col m4 s12">
-                <div className="card-panel">
-                    <span><strong>Featured Section</strong></span>
+            <CreatePost />
+            { props.posts.loading && <Loader /> }
+            <div className="row">
+                <div className="col m7 s12">
+                    <ul className="pagination">
+                        { prev && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, prev)}><i className="material-icons">chevron_left</i></li> }
+                        { next && <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, next)}><a href="#!"><i className="material-icons">chevron_right</i></a></li> }
+                    </ul>
+                    {postsArray}
+                </div>
+                <div className="col m1 s12"></div>
+                <div className="col m4 s12">
+                    <div className="card-panel">
+                        <span><strong>Featured Section</strong></span>
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     )
 }

@@ -35,7 +35,7 @@ const SignIn = (props) => {
     return (
         
         <div className="container" style={{marginTop: '50px'}}>
-            { props.auth.loading && <Loader />}
+            { props.auth.loading && <Loader type="linear" />}
             <div className="col s2"></div>
                 <div className="col s8">
                     <form>
