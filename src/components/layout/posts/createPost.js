@@ -40,12 +40,12 @@ const CreatePost = () => {
                         <div className="input-field col s12">
                             <select className="browser-default" defaultValue="">
                                 <option value="" disabled>Choose</option>
-                                <option value="1">Very Sad</option>
-                                <option value="1">Sad</option>
-                                <option value="1">Neutral</option>
-                                <option value="2">Pissed</option>
-                                <option value="2">Extremely Pissed</option>
-                                <option value="3">Fucking Furious</option>
+                                <option value="Very Sad">Very Sad</option>
+                                <option value="Sad">Sad</option>
+                                <option value="Neutral">Neutral</option>
+                                <option value="Pissed">Pissed</option>
+                                <option value="Extremely Pissed">Extremely Pissed</option>
+                                <option value="Fucking Furious">Fucking Furious</option>
                             </select>
                         </div>
                     </div>
