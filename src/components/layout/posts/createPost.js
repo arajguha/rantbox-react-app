@@ -4,8 +4,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Loader from '../../generic/loader'
-import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
+import 'react-toastify/dist/ReactToastify.css'
 
  
 const CreatePost = (props) => {

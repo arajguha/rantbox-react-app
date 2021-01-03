@@ -36,7 +36,7 @@ const Dashboard = (props) => {
         )
     }    
 
-    const postsArray = posts.map(post => <PostCard key={post.id} title={post.title} text={post.text} />)
+    const postsArray = posts.map(post => <PostCard key={post.id} id={post.id} title={post.title} text={post.text} />)
     return (
         <>  
             <div className="row">

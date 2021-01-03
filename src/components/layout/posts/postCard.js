@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom' 
+
 
 const PostCard = (props) => {
     return (
@@ -9,7 +11,7 @@ const PostCard = (props) => {
                         <p>{props.text.substring(0, 25) + "..."}</p>
                     </div>
                     <div className="card-action">
-                        <a href="#" className="teal-text">view</a>
+                        <span className="teal-text"><Link to={`/post-detail/${props.id}`}>view</Link></span>
                     </div>
                 </div>
             </div>
