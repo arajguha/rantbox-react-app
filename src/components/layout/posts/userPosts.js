@@ -2,29 +2,35 @@ import React, { useState, useEffect } from 'react'
 import PostCard from './postCard'
 import Loader from '../../generic/loader'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 
 const UserPosts = (props) => {
+    const history = useHistory()
     const [posts, setPosts] = useState([])
     const [err, setErr] = useState('')
     const [loading, setLoading] = useState(false)
+    const [unmounted, setUnmounted] = useState(false)
 
     useEffect(() => {
-        setLoading(true)
-        axios
-            .get('http://localhost:8000/rant-posts/my-rants/', {
-                'headers': { 'Authorization': `Token ${props.auth.token}`}
-            })
-            .then((res) => {
-                setPosts(res.data)
-                setLoading(false)
-            })
-            .catch(err => {
-                console.log(err)
-                setLoading(false)
-            })
+        console.log(props)
+        if(!unmounted) {
+            setLoading(true)
+            axios
+                .get('http://localhost:8000/rant-posts/my-rants/', {
+                    'headers': { 'Authorization': `Token ${props.auth.token}`}
+                })
+                .then((res) => {
+                    setPosts(res.data)
+                    setLoading(false)
+                })
+                .catch(err => {
+                    console.log(err)
+                    setLoading(false)
+                })
+        }
+        return () => setUnmounted(true)
     }, [])
 
 
@@ -33,9 +39,9 @@ const UserPosts = (props) => {
         <div className="container">
             { loading && <Loader type="linear" /> }
             {postsArray}
-            <Link to="/dashboard">
-                <button className="waves-effect waves-light btn" ><i className="material-icons left">chevron_left</i></button>
-            </Link>
+            <span className="waves-effect waves-light btn" onClick={() => history.goBack()}>
+                <i className="material-icons left">chevron_left</i>
+            </span>
         </div>
     )
 }

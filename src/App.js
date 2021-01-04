@@ -11,6 +11,7 @@ import UserPosts from './components/layout/posts/userPosts'
 
 
 const App = () => {
+
   return (
     <div className="App">
       <Router>
@@ -22,7 +23,7 @@ const App = () => {
           <Route path="/signup"><SignUp /></Route>
           <Route path="/about"><About /></Route>
           <Route path="/create-rant"><CreatePost /></Route>
-          <Route path="/my-rants"><UserPosts /></Route>
+          <Route path="/my-rants" component={UserPosts}></Route>
           <Route path="/post-detail/:id" component={PostDetail} ></Route>
         </Switch>
       </Router>

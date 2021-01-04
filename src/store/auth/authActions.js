@@ -12,7 +12,7 @@ export const login = (userData) => {
                 dispatch(loginError(err.response.data.non_field_errors))
                 //console.log(err.response.data.non_field_errors)
             })
-            .catch(() => dispatch(loginError('some error occured while logging in')))
+            .catch((err) => dispatch(loginError('some error occured while logging in')))
     }
 }
 

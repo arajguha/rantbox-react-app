@@ -3,12 +3,13 @@ import Loader from '../../generic/loader'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
 import { feelingsDict } from '../../../utils/utils'
+import { useHistory } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 
 
 const PostDetail = (props) => {
+    const history = useHistory()
     const [loading, setLoading] = useState(false)
     const [err, setErr] = useState('')
     const [rantPost, setRantPost] = useState({})
@@ -72,9 +73,11 @@ const PostDetail = (props) => {
                     </div>
                 </div>
             </div>
-                <Link to="/dashboard">
-                    <button className="waves-effect waves-light btn" ><i className="material-icons left">chevron_left</i></button>
-                </Link>
+            
+                <button className="waves-effect waves-light btn" onClick={() => history.goBack()}>
+                    <i className="material-icons left">chevron_left</i>
+                </button>
+                
             </div>
 
         </div>
