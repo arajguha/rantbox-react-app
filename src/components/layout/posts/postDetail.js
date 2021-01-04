@@ -55,10 +55,10 @@ const PostDetail = (props) => {
                     <div className="card">
                         <div className="card-content">
                             <div className="row">
-                                <div className="col s10">
+                                <div className="col s8 m10">
                                     <span className="card-title"><strong>{rantPost.title}</strong></span>
                                 </div>
-                                <div className="col s2">
+                                <div className="col s4 m2">
                                     <p><strong>{rantPost.created_on}</strong></p>
                                 </div>
                             </div>
