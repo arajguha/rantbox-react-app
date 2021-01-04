@@ -14,7 +14,6 @@ const UserPosts = (props) => {
     const [unmounted, setUnmounted] = useState(false)
 
     useEffect(() => {
-        console.log(props)
         if(!unmounted) {
             setLoading(true)
             axios
