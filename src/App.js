@@ -7,6 +7,7 @@ import Dashboard from './components/layout/dashboard/dashboard'
 import About from './components/layout/dashboard/about'
 import CreatePost from './components/layout/posts/createPost'
 import PostDetail from './components/layout/posts/postDetail'
+import UserPosts from './components/layout/posts/userPosts'
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/signup"><SignUp /></Route>
           <Route path="/about"><About /></Route>
           <Route path="/create-rant"><CreatePost /></Route>
+          <Route path="/my-rants"><UserPosts /></Route>
           <Route path="/post-detail/:id" component={PostDetail} ></Route>
         </Switch>
       </Router>

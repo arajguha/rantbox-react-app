@@ -69,7 +69,7 @@ const CreatePost = (props) => {
 
     if(created) {
         console.log('created')
-        return <Redirect to="/rants" />
+        return <Redirect to="/my-rants" />
     }
 
     return (
