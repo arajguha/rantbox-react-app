@@ -13,9 +13,7 @@ const Dashboard = (props) => {
     const [next, setNext] = useState(null)
 
     useEffect(() => {
-        console.log('component did mount')
         if(props.auth.token){
-            console.log('get request called')
             props.getPosts(props.auth.token)
         }
     }, [])

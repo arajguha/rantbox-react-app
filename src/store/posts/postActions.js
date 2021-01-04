@@ -11,7 +11,6 @@ export const fetchPosts = (token, link=null) => {
                 'headers': { 'Authorization': `Token ${token}` }
             })
             .then(json => {
-                console.log('postActions', json.data)
                 dispatch(fetchPostsSuccess(json.data))
             })
             .catch(err => {
