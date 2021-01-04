@@ -73,7 +73,7 @@ const PostDetail = (props) => {
                 </div>
             </div>
                 <Link to="/dashboard">
-                    <a class="waves-effect waves-light btn" ><i class="material-icons left">chevron_left</i>back</a>
+                    <button className="waves-effect waves-light btn" ><i className="material-icons left">chevron_left</i></button>
                 </Link>
             </div>
 
