@@ -49,21 +49,27 @@ const Dashboard = (props) => {
                     </div>
                 </div>
              </div>
-            { props.posts.loading && <Loader /> }
             <div className="row">
                 <div className="col m7 s12">
                     <ul className="pagination">
-                        { prev && 
-                            <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, prev)}>
+                        
+                            {/*<button className="btn btn-info waves-effect" onClick={() => props.getPosts(props.auth.token, prev)} disabled={!prev}>
                                     <i className="material-icons">chevron_left</i>
-                            </li> 
-                        }
-                        { next && 
-                            <li className="waves-effect" onClick={() => props.getPosts(props.auth.token, next)}>
-                                <i className="material-icons">chevron_right</i>
-                            </li> 
-                        }
+                            </button> */}
+                            <a 
+                                class="waves-effect waves-light btn" 
+                                onClick={() => props.getPosts(props.auth.token, prev)}
+                                disabled={!prev}>
+                                <i class="material-icons left">chevron_left</i>
+                            </a>
+                            <a 
+                                class="waves-effect waves-light btn" 
+                                onClick={() => props.getPosts(props.auth.token, next)}
+                                disabled={!next}>
+                                <i class="material-icons left">chevron_right</i>
+                            </a>
                     </ul>
+                    { props.posts.loading && <Loader /> }
                     {postsArray}
                 </div>
                 <div className="col m1 s12"></div>

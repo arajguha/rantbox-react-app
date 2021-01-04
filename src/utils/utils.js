@@ -3,7 +3,7 @@ export const isEmpty = (s) => {
 }
 
 export const feelingsDict = {
-    'N': 'Neutal',
+    'N': 'Neutral',
     'FF': 'Fucking Furious',
     'P': 'Pissed',
     'EP': 'Extremely Pissed',

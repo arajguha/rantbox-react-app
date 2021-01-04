@@ -34,6 +34,7 @@ const PostDetail = (props) => {
             })
             .then(res => {
                 const post = res.data
+                post.created_on = res.data.created_on.split('T')[0]
                 setRantPost(post)
                 setLoading(false)
             })
@@ -53,7 +54,14 @@ const PostDetail = (props) => {
                 <div className="col s10">
                     <div className="card">
                         <div className="card-content">
-                            <span className="card-title"><strong>{rantPost.title}</strong></span>
+                            <div className="row">
+                                <div className="col s10">
+                                    <span className="card-title"><strong>{rantPost.title}</strong></span>
+                                </div>
+                                <div className="col s2">
+                                    <p><strong>{rantPost.created_on}</strong></p>
+                                </div>
+                            </div>
                             <div className="chip">
                                 {feelingsDict[rantPost.feeling_level]}
                             </div>
@@ -64,7 +72,9 @@ const PostDetail = (props) => {
                     </div>
                 </div>
             </div>
-                <Link to="/dashboard"><i className="material-icons">chevron_left</i></Link>
+                <Link to="/dashboard">
+                    <a class="waves-effect waves-light btn" ><i class="material-icons left">chevron_left</i>back</a>
+                </Link>
             </div>
 
         </div>
