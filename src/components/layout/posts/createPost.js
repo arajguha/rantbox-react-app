@@ -4,11 +4,13 @@ import { ToastContainer, toast } from 'react-toastify'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Loader from '../../generic/loader'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css'
 
  
 const CreatePost = (props) => {
+    const history = useHistory()
     const [title, setTitle] = useState('')
     const [feeling, setFeeling] = useState('')
     const [body, setBody] = useState('')
@@ -122,6 +124,9 @@ const CreatePost = (props) => {
 
                     </form>
                 </div>
+                <span className="waves-effect waves-light" onClick={() => history.goBack()}>
+                    <i className="material-icons left">chevron_left</i>
+                </span>
             </div>
         </>
     )

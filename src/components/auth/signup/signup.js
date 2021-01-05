@@ -1,41 +1,61 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { isEmpty } from '../../../utils/utils'
 import { ToastContainer, toast } from 'react-toastify'
+import { Redirect } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
+import axios from 'axios'
 
 
 const SignUp = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [formSubmitted, setFormSubmitted] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [err, setErr] = useState('')
+    const [success, setSuccess] = useState(false)
+
+    useEffect(() => {
+        if(err !== '')
+            toast.error(err, {
+                position: "top-center",
+                autoClose: 5000,
+            })
+        return () => setErr('')
+    }, [err])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const signUpData = { username, password, confirmPassword }
+        const signUpData = { username, password, 'confirm_password': confirmPassword }
 
         if(isEmpty(username))
-            toast.error('Username cannot empty', {
-                position: "top-center",
-                autoClose: 2000,
-            })
+            setErr('Username cannot empty')
         
         else if(isEmpty(password) || isEmpty(confirmPassword))
-            toast.error('Password cannot empty', {
-                position: "top-center",
-                autoClose: 2000,
-            })
-        else if(password.trim() !== confirmPassword.trim()) {
-            toast.error('Passwords do not match', {
-                position: "top-center",
-                autoClose: 2000,
-            })
-        }
+            setErr('Password cannot empty')
+
+        else if(password.trim() !== confirmPassword.trim())
+            setErr('Passwords do not match')
         
         else{
-            console.log(signUpData)
-            setFormSubmitted(true)
+            setLoading(true)
+            axios
+                .post('http://localhost:8000/signup/', signUpData)
+                .then(res => {
+                    console.log(res)
+                    setLoading(false)
+                    setSuccess(true)
+                })
+                .catch(err => {
+                    console.log(err.response.data.error_message)
+                    setLoading(false)
+                    setErr(err.response.data.error_message)
+                })
+
         }
+    }
+
+    if(success) {
+        return <Redirect to="/signin" />
     }
 
     return (
@@ -69,7 +89,7 @@ const SignUp = () => {
                                 onChange={(e) => setConfirmPassword(e.target.value)} 
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary" onClick={handleSubmit} disabled={formSubmitted}>Sign Up</button>
+                        <button type="submit" className="btn btn-primary" onClick={handleSubmit} disabled={loading}>Sign Up</button>
                     </form>
                 </div>
                 <div className="col s2"></div>

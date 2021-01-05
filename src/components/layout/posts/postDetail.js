@@ -13,7 +13,6 @@ const PostDetail = (props) => {
     const [loading, setLoading] = useState(false)
     const [err, setErr] = useState('')
     const [rantPost, setRantPost] = useState({})
-    const [unmounted, setUnmounted] = useState(false)
 
     useEffect( () => {
         if(err !== '') {
@@ -27,27 +26,24 @@ const PostDetail = (props) => {
 
 
     useEffect(() => {
-        if(!unmounted) {
-            setLoading(true)
-            console.log(props)
-
-            axios
-                .get(`http://localhost:8000/rant-posts/${props.match.params.id}/`, {
-                    'headers': { 'Authorization': `Token ${props.auth.token}` }
-                })
-                .then(res => {
-                    const post = res.data
-                    post.created_on = res.data.created_on.split('T')[0]
-                    setRantPost(post)
-                    setLoading(false)
-                })
-                .catch(err => {
-                    console.log(err)
-                    setLoading(false)
-                    setErr(err)
+        
+        setLoading(true)
+        axios
+            .get(`http://localhost:8000/rant-posts/${props.match.params.id}/`, {
+                'headers': { 'Authorization': `Token ${props.auth.token}` }
             })
-        }
-        return () => setUnmounted(true)
+            .then(res => {
+                const post = res.data
+                post.created_on = res.data.created_on.split('T')[0]
+                setRantPost(post)
+                setLoading(false)
+            })
+            .catch(err => {
+                console.log(err)
+                setLoading(false)
+                setErr(err)
+        })
+        
     }, [])
 
     return (
