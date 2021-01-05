@@ -70,37 +70,50 @@ const SignUp = () => {
         <>
             <ToastContainer />
             <div className="container" style={{marginTop: '50px'}}>
-                <div className="col s2"></div>
-                <div className="col s8">
-                    <form>
-                        <div className="input-field">
-                            <label htmlFor="username">Username</label>
-                            <input 
-                                id="username"
-                                type="text"
-                                onChange={(e) => setUsername(e.target.value)} 
-                            />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="password">Password</label>
-                            <input 
-                                id="password"
-                                type="password"  
-                                onChange={(e) => setPassword(e.target.value)} 
-                            />
-                        </div>
-                        <div className="input-field">
-                            <label htmlFor="confirm_password">Confirm Password</label>
-                            <input 
-                                id="confirm_password"
-                                type="password" 
-                                onChange={(e) => setConfirmPassword(e.target.value)} 
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-primary" onClick={handleSubmit} disabled={loading}>Sign Up</button>
-                    </form>
+                <div className="row">
+                    <div className="col s12 m6">
+                        <form>
+                            <div className="input-field">
+                                <label htmlFor="username">Username</label>
+                                <input 
+                                    id="username"
+                                    type="text"
+                                    onChange={(e) => setUsername(e.target.value)} 
+                                />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="password">Password</label>
+                                <input 
+                                    id="password"
+                                    type="password"  
+                                    onChange={(e) => setPassword(e.target.value)} 
+                                />
+                            </div>
+                            <div className="input-field">
+                                <label htmlFor="confirm_password">Confirm Password</label>
+                                <input 
+                                    id="confirm_password"
+                                    type="password" 
+                                    onChange={(e) => setConfirmPassword(e.target.value)} 
+                                />
+                            </div>
+                            <button type="submit" className="btn btn-primary" onClick={handleSubmit} disabled={loading}>Sign Up</button>
+                        </form>
+                    </div>
+                    <div className="col s12 m6">        
+                        <div className="card" style={{margin: '10px'}}>
+                            <div className="card-content">
+                                <span className="card-title">Password Policy</span>
+                                <ol>
+                                    <li>must be between 6 to 20 characters</li>
+                                    <li>must contain contain at least one numeric digit</li>
+                                    <li>must contain contain at least one uppercase</li>
+                                    <li>must contain contain at least  one lowercase letter</li>
+                                </ol>
+                            </div>
+                        </div>    
+                    </div>
                 </div>
-                <div className="col s2"></div>
             </div>
         </>
     )
