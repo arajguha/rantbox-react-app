@@ -11,7 +11,7 @@ const SignIn = (props) => {
     const [message, setMessage] = useState('')
 
     useEffect(() => {
-        props.clearError()
+        return () => props.clearError()
     }, [])
 
     useEffect(() => {
