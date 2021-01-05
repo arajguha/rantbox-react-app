@@ -25,6 +25,8 @@ const SignUp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const pwdRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/
+
         const signUpData = { username, password, 'confirm_password': confirmPassword }
 
         if(isEmpty(username))
@@ -35,6 +37,12 @@ const SignUp = () => {
 
         else if(password.trim() !== confirmPassword.trim())
             setErr('Passwords do not match')
+        
+        else if(username.trim().length < 3)
+            setErr('Username should have atleast 3 characters')
+        
+        else if(!password.match(pwdRegex))
+            setErr('Please follow password policy')
         
         else{
             setLoading(true)
@@ -55,7 +63,7 @@ const SignUp = () => {
     }
 
     if(success) {
-        return <Redirect to="/signin" />
+        return <Redirect to="/dashboard" />
     }
 
     return (

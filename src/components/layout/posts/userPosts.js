@@ -14,7 +14,10 @@ const UserPosts = (props) => {
     const [err, setErr] = useState('')
     const [loading, setLoading] = useState(false)
 
-    
+    useEffect(() => {
+        setLoading(true)
+    }, [])
+
     useEffect(() => {
         if(err !== '') {
             console.log('error notification triggered')
@@ -44,7 +47,7 @@ const UserPosts = (props) => {
     
     }, [])
 
-    if(posts.length === 0) {
+    if(posts.length === 0 && !loading) {
         return (
             <div className="container">
                 <div className="row">
