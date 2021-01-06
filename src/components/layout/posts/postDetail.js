@@ -15,7 +15,6 @@ const PostDetail = (props) => {
     const [rantPost, setRantPost] = useState({})
     const [reacted, setReacted] = useState(false)
     const [reactorCount, setReactorCount] = useState(0)
-    const [buttonText, setButtonText] = useState('')
 
     useEffect( () => {
         if(err !== '') {
@@ -61,12 +60,6 @@ const PostDetail = (props) => {
         })
         
     }, [])
-
-
-    useEffect(() => {
-        const buttonText = reacted ? 'Take Back Fuck' : 'Give a Fuck'
-        setButtonText(buttonText)
-    }, [reacted])
 
 
     const handleReaction = (e) => {
@@ -115,7 +108,7 @@ const PostDetail = (props) => {
                 <div className="row">
                     <div className="col s12">
                         <button className="waves-effect waves-light btn" onClick={handleReaction}>
-                            <i className="material-icons left">thumb_up</i>{buttonText}
+                            <i className="material-icons left">thumb_up</i>{reacted ?  'Take Back Fuck' : 'Give a Fuck'}
                         </button>
                     </div>
                 </div>
