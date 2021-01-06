@@ -74,7 +74,7 @@ const UserPosts = (props) => {
             { loading && <Loader type="linear" /> }
             {postsArray}
             <span className="waves-effect waves-light btn" onClick={() => history.goBack()}>
-                <i className="material-icons left">chevron_left</i>
+                <i className="material-icons small">chevron_left</i>
             </span>
         </div>
     )

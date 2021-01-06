@@ -16,6 +16,7 @@ const PostDetail = (props) => {
     const [reacted, setReacted] = useState(false)
     const [reactorCount, setReactorCount] = useState(0)
 
+
     useEffect( () => {
         if(err !== '') {
             console.log('error notification triggered')
@@ -82,6 +83,7 @@ const PostDetail = (props) => {
         <div>
             { loading && <Loader type='linear' />}
             <ToastContainer />
+            
             <div className="container">
                 <div className="row">
                     <div className="col s10">
@@ -106,16 +108,19 @@ const PostDetail = (props) => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col s12">
-                        <button className="waves-effect waves-light btn" onClick={handleReaction}>
+                    <div className="col s6">
+                        <button className="waves-effect waves-light btn-small" onClick={handleReaction}>
                             <i className="material-icons left">thumb_up</i>{reacted ?  'Take Back Fuck' : 'Give a Fuck'}
                         </button>
+                    </div>
+                    <div className="col 6">
+                        <p><strong>So far, {reactorCount} user(s) gave a fuck.</strong></p>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col s12">
                         <a className="waves-effect waves-light" onClick={() => history.goBack()}>
-                            <i className="material-icons left">chevron_left</i>
+                            <i className="material-icons">chevron_left</i>
                         </a>
                     </div>
                 </div>
