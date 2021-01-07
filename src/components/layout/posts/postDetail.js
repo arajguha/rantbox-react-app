@@ -87,6 +87,7 @@ const PostDetail = (props) => {
             <div className="container">
                 <div className="row">
                     <div className="col s10">
+                        { reacted && <p><strong>Seems like you gave a fuck</strong></p> }
                         <div className="card">
                             <div className="card-content">
                                 <div className="row">
