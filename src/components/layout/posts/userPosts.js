@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PostCard from './postCard'
 import Loader from '../../generic/loader'
 import { connect } from 'react-redux'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory, Link, Redirect } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css'
@@ -29,23 +29,28 @@ const UserPosts = (props) => {
     }, [err])
 
     useEffect(() => {
+        if(props.auth.isLoggedIn){
         
-        setLoading(true)
-        axios
-            .get('http://localhost:8000/rant-posts/my-rants/', {
-                'headers': { 'Authorization': `Token ${props.auth.token}`}
-            })
-            .then((res) => {
-                setPosts(res.data)
-                setLoading(false)
-            })
-            .catch(err => {
-                console.log(err)
-                setErr(err)
-                setLoading(false)
-            })
+            setLoading(true)
+            axios
+                .get('http://localhost:8000/rant-posts/my-rants/', {
+                    'headers': { 'Authorization': `Token ${props.auth.token}`}
+                })
+                .then((res) => {
+                    setPosts(res.data)
+                    setLoading(false)
+                })
+                .catch(err => {
+                    console.log(err)
+                    setErr(err)
+                    setLoading(false)
+                })
+        }
     
     }, [])
+
+    if(!props.auth.isLoggedIn)
+        return <Redirect to="/dashboard"/>
 
     if(posts.length === 0 && !loading) {
         return (

@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { feelingsDict } from '../../../utils/utils'
 import { useHistory } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
+import AuthCheckerHoc from '../../generic/AuthCheckerHoc'
 
 
 const PostDetail = (props) => {
@@ -25,40 +26,43 @@ const PostDetail = (props) => {
                 autoClose: 2000,
             })
         }
+        return () => setErr('')
     }, [err])
 
 
     useEffect(() => {
+        if(props.auth.isLoggedIn) {
         
-        setLoading(true)
-        axios
-            .get(`http://localhost:8000/rant-posts/${props.match.params.id}/`, {
-                'headers': { 'Authorization': `Token ${props.auth.token}` }
+            setLoading(true)
+            axios
+                .get(`http://localhost:8000/rant-posts/${props.match.params.id}/`, {
+                    'headers': { 'Authorization': `Token ${props.auth.token}` }
+                })
+                .then(res => {
+                    const post = res.data
+                    post.created_on = res.data.created_on.split('T')[0]
+                    setRantPost(post)
+                    setLoading(false)
+                })
+                .catch(err => {
+                    console.log(err)
+                    setLoading(false)
+                    setErr(err)
             })
-            .then(res => {
-                const post = res.data
-                post.created_on = res.data.created_on.split('T')[0]
-                setRantPost(post)
-                setLoading(false)
-            })
-            .catch(err => {
-                console.log(err)
-                setLoading(false)
-                setErr(err)
-        })
 
-        axios
-            .get(`http://localhost:8000/rant-posts/reaction-status/${props.match.params.id}/`, {
-                'headers': { 'Authorization': `Token ${props.auth.token}` }
+            axios
+                .get(`http://localhost:8000/rant-posts/reaction-status/${props.match.params.id}/`, {
+                    'headers': { 'Authorization': `Token ${props.auth.token}` }
+                })
+                .then(res => {
+                    setReactorCount(res.data.users_count)
+                    setReacted(res.data.self_reacted)
+                })
+                .catch(err => {
+                    console.log(err)
+                    setErr(err)
             })
-            .then(res => {
-                setReactorCount(res.data.users_count)
-                setReacted(res.data.self_reacted)
-            })
-            .catch(err => {
-                console.log(err)
-                setErr(err)
-        })
+        }
         
     }, [])
 
@@ -70,7 +74,7 @@ const PostDetail = (props) => {
                 'headers': { 'Authorization': `Token ${props.auth.token}` }
             })
             .then(res => {
-                console.log(res.data)
+                //console.log(res.data)
                 setReacted(res.data.reaction_status)
             })
             .catch(err => {
@@ -81,53 +85,54 @@ const PostDetail = (props) => {
 
     return (
         <div>
-            { loading && <Loader type='linear' />}
-            <ToastContainer />
-            
-            <div className="container">
-                <div className="row">
-                    <div className="col s10">
-                        { reacted && <p><strong>Seems like you gave a fuck</strong></p> }
-                        <div className="card">
-                            <div className="card-content">
-                                <div className="row">
-                                    <div className="col s8 m10">
-                                        <span className="card-title"><strong>{rantPost.title}</strong></span>
+            <AuthCheckerHoc>
+                { loading && <Loader type='linear' />}
+                <ToastContainer />
+                
+                <div className="container">
+                    <div className="row">
+                        <div className="col s10">
+                            { reacted && <p><strong>Seems like you gave a fuck</strong></p> }
+                            <div className="card">
+                                <div className="card-content">
+                                    <div className="row">
+                                        <div className="col s8 m10">
+                                            <span className="card-title"><strong>{rantPost.title}</strong></span>
+                                        </div>
+                                        <div className="col s4 m2">
+                                            <p><strong>{rantPost.created_on}</strong></p>
+                                        </div>
                                     </div>
-                                    <div className="col s4 m2">
-                                        <p><strong>{rantPost.created_on}</strong></p>
+                                    <div className="chip">
+                                        {feelingsDict[rantPost.feeling_level]}
                                     </div>
                                 </div>
-                                <div className="chip">
-                                    {feelingsDict[rantPost.feeling_level]}
+                                <div className="card-content">
+                                    <p>{rantPost.text}</p>
                                 </div>
-                            </div>
-                            <div className="card-content">
-                                <p>{rantPost.text}</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="row">
-                    <div className="col s6">
-                        <button className="waves-effect waves-light btn-small" onClick={handleReaction}>
-                            <i className="material-icons left">thumb_up</i>{reacted ?  'Take Back Fuck' : 'Give a Fuck'}
-                        </button>
+                    <div className="row">
+                        <div className="col s6">
+                            <button className="waves-effect waves-light btn-small" onClick={handleReaction}>
+                                <i className="material-icons left">thumb_up</i>{reacted ?  'Take Back Fuck' : 'Give a Fuck'}
+                            </button>
+                        </div>
+                        <div className="col 6">
+                            <p><strong>So far, {reactorCount} user(s) gave a fuck.</strong></p>
+                        </div>
                     </div>
-                    <div className="col 6">
-                        <p><strong>So far, {reactorCount} user(s) gave a fuck.</strong></p>
+                    <div className="row">
+                        <div className="col s12">
+                            <a className="waves-effect waves-light" onClick={() => history.goBack()}>
+                                <i className="material-icons">chevron_left</i>
+                            </a>
+                        </div>
                     </div>
+                    
                 </div>
-                <div className="row">
-                    <div className="col s12">
-                        <a className="waves-effect waves-light" onClick={() => history.goBack()}>
-                            <i className="material-icons">chevron_left</i>
-                        </a>
-                    </div>
-                </div>
-                
-            </div>
-
+            </AuthCheckerHoc>
         </div>
     )
 }
