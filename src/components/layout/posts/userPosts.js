@@ -4,6 +4,7 @@ import Loader from '../../generic/loader'
 import { connect } from 'react-redux'
 import { useHistory, Link, Redirect } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
+import { CSVLink, CSVDownload } from "react-csv";
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -13,6 +14,9 @@ const UserPosts = (props) => {
     const [posts, setPosts] = useState([])
     const [err, setErr] = useState('')
     const [loading, setLoading] = useState(false)
+    const [downloadReady, setDownloadReady] = useState(false)
+    const [csvData, setCsvData] = useState([])
+    const [generating, setGenerating] = useState(false)
 
     useEffect(() => {
         setLoading(true)
@@ -49,8 +53,27 @@ const UserPosts = (props) => {
     
     }, [])
 
+    const generateReport = () => {
+        setGenerating(true)
+        axios
+            .get('http://localhost:8000/generate-report/json/', {
+                'headers': { 'Authorization': `Token ${props.auth.token}`}
+            })
+            .then((res) => {
+                console.log(res.data)
+                setCsvData(res.data)
+                setDownloadReady(true)
+                setGenerating(false)
+            })
+            .catch((err) => { 
+                console.log('error ocurred')
+                setGenerating(false)
+            })
+    }
+
+
     if(!props.auth.isLoggedIn)
-        return <Redirect to="/dashboard"/>
+        return <Redirect to="/dashboard" />
 
     if(posts.length === 0 && !loading) {
         return (
@@ -74,14 +97,46 @@ const UserPosts = (props) => {
 
     const postsArray = posts.map(post => <PostCard key={post.id} id={post.id} title={post.title} text={post.text} />)
     return (
-        <div className="container">
+        <>
             <ToastContainer />
             { loading && <Loader type="linear" /> }
-            {postsArray}
-            <span className="waves-effect waves-light btn" onClick={() => history.goBack()}>
-                <i className="material-icons small">chevron_left</i>
-            </span>
-        </div>
+            <div className="row">
+                <div className="col s12 m6">
+                    <h4>My Rants</h4>
+                    {postsArray}
+                    <span className="waves-effect waves-light btn btn-small" onClick={() => history.goBack()}>
+                        <i className="material-icons small">chevron_left</i>
+                    </span>
+                </div>
+                <div className="col m2"></div>
+                <div className="col s12 m4">
+                
+                    <div className="card" style={{ marginTop: '10px' }}>
+                        <div className="card-content">
+                        <span className="card-title"><strong>Action Center</strong></span>
+                        <p style={{ fontSize: '16px' }}>Export my rants</p>
+                        </div>
+                        <div className="card-action">
+                            { !downloadReady && 
+                                <span className="waves-effect waves-light btn btn-small" onClick={generateReport}>
+                                    Generate Export
+                                    <i className="material-icons left">file_download</i>
+                                </span>
+                            }
+                            { generating && <Loader type='linear' /> }
+                            { downloadReady && 
+                                <CSVLink data={csvData} filename={"myrants.csv"}>
+                                    <span className="waves-effect waves-light btn btn-small">Download
+                                        <i className="material-icons left">file_download</i>
+                                    </span>
+                                </CSVLink> 
+                            }
+                        </div>
+                   
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 
