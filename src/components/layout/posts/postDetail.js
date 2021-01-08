@@ -110,19 +110,25 @@ const PostDetail = (props) => {
                                 <div className="card-content">
                                     <p>{rantPost.text}</p>
                                 </div>
+                                <div className="card-action">
+                                    <button className="waves-effect waves-light btn-small" onClick={handleReaction}>
+                                        <i className="material-icons left">thumb_up</i>{reacted ?  'Take Back Fuck' : 'Give a Fuck'}
+                                    </button>
+                                    <button 
+                                        className="waves-effect waves-light btn-small red" 
+                                        onClick={handleReaction}
+                                        style={{ margin: '10px' }}
+                                    >
+                                        <i className="material-icons left">delete</i>Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col s6">
-                            <button className="waves-effect waves-light btn-small" onClick={handleReaction}>
-                                <i className="material-icons left">thumb_up</i>{reacted ?  'Take Back Fuck' : 'Give a Fuck'}
-                            </button>
-                        </div>
-                        <div className="col 6">
+                        <div className="col 4">
                             <p><strong>So far, {reactorCount} user(s) gave a fuck.</strong></p>
                         </div>
                     </div>
+                
                     <div className="row">
                         <div className="col s12">
                             <a className="waves-effect waves-light" onClick={() => history.goBack()}>

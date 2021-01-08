@@ -24,6 +24,7 @@ const CreatePost = (props) => {
                 position: "top-center",
                 autoClose: 2000,
             })
+        return () => setMessage('')
     }, [message])
 
 
