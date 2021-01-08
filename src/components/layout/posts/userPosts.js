@@ -17,6 +17,7 @@ const UserPosts = (props) => {
     const [downloadReady, setDownloadReady] = useState(false)
     const [csvData, setCsvData] = useState([])
     const [generating, setGenerating] = useState(false)
+    const [emptyRantBox, setEmptyRantBox] = useState(false)
 
     useEffect(() => {
         setLoading(true)
@@ -43,6 +44,9 @@ const UserPosts = (props) => {
                 .then((res) => {
                     setPosts(res.data)
                     setLoading(false)
+                    if(res.data.length === 0)
+                        setEmptyRantBox(true)
+
                 })
                 .catch(err => {
                     console.log(err)
@@ -50,8 +54,12 @@ const UserPosts = (props) => {
                     setLoading(false)
                 })
         }
-    
+        return () => {
+            setLoading(false)
+        }
+        
     }, [])
+
 
     const generateReport = () => {
         setGenerating(true)
@@ -75,7 +83,7 @@ const UserPosts = (props) => {
     if(!props.auth.isLoggedIn)
         return <Redirect to="/dashboard" />
 
-    if(posts.length === 0 && !loading) {
+    if(emptyRantBox) {
         return (
             <div className="container">
                 <div className="row">
@@ -113,7 +121,7 @@ const UserPosts = (props) => {
                 
                     <div className="card" style={{ marginTop: '10px' }}>
                         <div className="card-content">
-                        <span className="card-title"><strong>Action Center</strong></span>
+                        <span className="card-title teal-text"><strong>Action Center</strong></span>
                         <p style={{ fontSize: '16px' }}>Export my rants</p>
                         </div>
                         <div className="card-action">
@@ -125,11 +133,14 @@ const UserPosts = (props) => {
                             }
                             { generating && <Loader type='linear' /> }
                             { downloadReady && 
+                                <div>
+                                <p>Your Export is ready</p>
                                 <CSVLink data={csvData} filename={"myrants.csv"}>
                                     <span className="waves-effect waves-light btn btn-small">Download
                                         <i className="material-icons left">file_download</i>
                                     </span>
                                 </CSVLink> 
+                                </div>
                             }
                         </div>
                    
