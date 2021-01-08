@@ -109,7 +109,7 @@ const UserPosts = (props) => {
             { loading && <Loader type="linear" /> }
             <div className="row">
                 <div className="col s12 m6">
-                    <h4>My Rants</h4>
+                    <h4 className="teal-text"><strong>My Rants</strong></h4>
                     {postsArray}
                     <span className="waves-effect waves-light btn btn-small" onClick={() => history.goBack()}>
                         <i className="material-icons small">chevron_left</i>
