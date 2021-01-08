@@ -4,7 +4,7 @@ import Loader from '../../generic/loader'
 import { connect } from 'react-redux'
 import { useHistory, Link, Redirect } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css'
 
