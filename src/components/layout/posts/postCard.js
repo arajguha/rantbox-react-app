@@ -10,8 +10,8 @@ const PostCard = (props) => {
                         <span className="card-title"><strong>{props.title}</strong></span>
                         <p>{props.text.substring(0, 25) + "..."}</p>
                     </div>
-                    <div className="card-action">
-                        <span className="teal-text"><Link to={`/post-detail/${props.id}`}>view</Link></span>
+                    <div className="card-content">
+                        <span className="teal-text"><Link to={`/post-detail/${props.id}`}><strong>view</strong></Link></span>
                     </div>
                 </div>
             </div>
