@@ -68,7 +68,6 @@ const UserPosts = (props) => {
                 'headers': { 'Authorization': `Token ${props.auth.token}`}
             })
             .then((res) => {
-                console.log(res.data)
                 setCsvData(res.data)
                 setDownloadReady(true)
                 setGenerating(false)
