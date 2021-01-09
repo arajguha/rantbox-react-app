@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 
 const PostCard = (props) => {
+
     return (
             <div className="col s12 m12">
                 <div className="card">
@@ -22,7 +23,7 @@ const PostCard = (props) => {
                         <p>{props.text.substring(0, 25) + "..."}</p>
                     </div>
                     <div className="card-action">
-                        <span className="teal-text"><Link to={`/post-detail/${props.id}`}><strong>view</strong></Link></span>
+                        <Link to={`/post-detail/${props.id}`}><strong>view</strong></Link>
                     </div>
                 </div>
             </div>

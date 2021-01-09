@@ -6,7 +6,8 @@ export const login = (userData) => {
     return dispatch => {
         dispatch(loginRequest())
         
-        axios.post('http://localhost:8000/login/', userData)
+        axios
+            .post('http://localhost:8000/login/', userData)
             .then(json => dispatch(loginSuccess(json.data)))
             .catch(err =>{ 
                 dispatch(loginError(err.response.data.non_field_errors))
@@ -22,10 +23,10 @@ export const loginRequest = () => {
     }
 }
 
-export const loginSuccess = (token) => {
+export const loginSuccess = (data) => {
     return {
         type: actions.LOGIN_SUCCESS,
-        payload: token
+        payload: data
     }
 }
 

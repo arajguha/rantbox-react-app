@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import { feelingsDict } from '../../../utils/utils'
-import { useHistory } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 import AuthCheckerHoc from '../../generic/AuthCheckerHoc'
+import DeleteModal from '../../generic/DeleteModal'
 
 
 const PostDetail = (props) => {
@@ -16,8 +17,9 @@ const PostDetail = (props) => {
     const [rantPost, setRantPost] = useState({})
     const [reacted, setReacted] = useState(false)
     const [reactorCount, setReactorCount] = useState(0)
+    const [postDeleted, setPostDeleted] = useState(false)
 
-
+    
     useEffect( () => {
         if(err !== '') {
             console.log('error notification triggered')
@@ -32,6 +34,7 @@ const PostDetail = (props) => {
 
     useEffect(() => {
         if(props.auth.isLoggedIn) {
+            //console.log(props.auth)
         
             setLoading(true)
             axios
@@ -43,6 +46,7 @@ const PostDetail = (props) => {
                     post.created_on = res.data.created_on.split('T')[0]
                     setRantPost(post)
                     setLoading(false)
+                    
                 })
                 .catch(err => {
                     console.log(err)
@@ -82,9 +86,28 @@ const PostDetail = (props) => {
             })
     }
 
+    const handleDelete = () => {
+        setPostDeleted(true)
+        console.log('delete handler called')
+    }
+
+    const deleteErrorHandler = (err) => {
+        setErr(err)
+        console.log(err)
+    }
+
+    if(postDeleted)
+        return <Redirect to="/my-rants" />
+
 
     return (
-        <div>
+        <div id="main">
+            <DeleteModal 
+                token={props.auth.token}
+                postid={props.match.params.id} 
+                deleteHandler={handleDelete} 
+                deleteErrorHandler={deleteErrorHandler}
+            />
             <AuthCheckerHoc>
                 { loading && <Loader type='linear' />}
                 <ToastContainer />
@@ -114,25 +137,25 @@ const PostDetail = (props) => {
                                     <button className="waves-effect waves-light btn-small" onClick={handleReaction}>
                                         <i className="material-icons left">thumb_up</i>{reacted ?  'Take Back Fuck' : 'Give a Fuck'}
                                     </button>
-                                    <button 
-                                        className="waves-effect waves-light btn-small red" 
-                                        onClick={handleReaction}
-                                        style={{ margin: '10px' }}
-                                    >
-                                        <i className="material-icons left">delete</i>Delete
-                                    </button>
-                                </div>
+                                    { props.auth.userid === rantPost.author &&
+                                        <button className="waves-effect waves-light btn-small btn-floating modal-trigger red right"
+                                            data-target="modal1"
+                                        >
+                                            <i className="material-icons left">delete</i>Delete
+                                        </button>
+                                    }
+                             </div>
                             </div>
                         </div>
                         <div className="col 4">
                             <p><strong>So far, {reactorCount} user(s) gave a fuck.</strong></p>
                         </div>
                     </div>
-                
+                                  
                     <div className="row">
                         <div className="col s12">
                             <a className="waves-effect waves-light" onClick={() => history.goBack()}>
-                                <i className="material-icons">chevron_left</i>
+                                <i className="material-icons left">chevron_left</i>
                             </a>
                         </div>
                     </div>

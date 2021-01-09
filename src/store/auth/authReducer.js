@@ -5,7 +5,7 @@ const initialState = {
     loading: false,
     isLoggedIn: false,
     token: null,
-    user_id: null,
+    userid: null,
     username: null,
     error: ''
 }
@@ -38,6 +38,7 @@ const authReducer = (state=initialState, action) => {
                 loading: false,
                 token: null,
                 isLoggedIn: false,
+                userid: null,
                 error: action.payload
             }
         case actions.CLEAR_ERROR:
