@@ -33,7 +33,7 @@ const About = () => {
                             <span className="card-title"><strong>Disclaimer</strong></span>
                             <p>
                                 Please note this is for fun and educational purposes only.
-                                This project takes inspiration from <a href="https://foaas.herokuapp.com/" target="_blank">FOAAS</a>.
+                                This project is inspired by <a href="https://foaas.herokuapp.com/" target="_blank">FOAAS</a>.
                                 More features will be added on this platform incrementally.
                             </p>
                         </div>
