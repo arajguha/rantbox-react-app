@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import PostCard from '../posts/postCard'
-import InfoCard from '../../generic/infocard'
 import { connect } from 'react-redux'
 import { fetchPosts } from '../../../store/posts/postActions'
 import { Link } from 'react-router-dom'
@@ -31,7 +30,23 @@ const Dashboard = (props) => {
         return ( 
             <AnimatedHoc>
                 <div className="container">
-                    <InfoCard title="Log In Required" text="Please log in to continue. If you are new you can sign up." /> 
+                    <div className="row">
+                        <div className="col s12">
+                            <div className="card">
+                                <div className="card-content">
+                                    <span className="card-title"><strong>Log In Required</strong></span>
+                                    <p>Please log in to continue. If you are new you can sign up.</p>
+                                </div>
+                                {
+                                    props.type !== 'error' &&
+                                    <div className="card-action">
+                                        <Link to="/signin"><strong>Log in</strong></Link>
+                                        <Link to="/signup"><strong>Sign Up</strong></Link>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </AnimatedHoc>
         )
