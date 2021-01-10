@@ -13,11 +13,12 @@ const About = () => {
                     <div className="card">
                         <div className="card-content">
                             <span className="card-title"><strong>About RantBox</strong></span>
-                            <p>RantBox is a platform for users to rant about anything anonymously. The platform allows users can create a rant,
-                                see what others are ranting about, etc.
+                            <p>RantBox is a platform for users to rant about anything anonymously. 
+                                The platform allows users to create 
+                                a rant, see what others are ranting about, etc.
                             </p>
                             <p>
-                                No user information is tagged to any post. We also encourage users to not
+                                No user information is tagged to any post. Users are also encouraged to not
                                 share any kind of personal information anywhere in the platform, 
                                 including the signup.
                             </p>
@@ -31,7 +32,9 @@ const About = () => {
                         <div className="card-content">
                             <span className="card-title"><strong>Disclaimer</strong></span>
                             <p>
-                                Please note this is for fun and educational purposes only. More features will be added incrementally.
+                                Please note this is for fun and educational purposes only.
+                                This project takes inspiration from <a href="https://foaas.herokuapp.com/" target="_blank">FOAAS</a>.
+                                More features will be added on this platform incrementally.
                             </p>
                         </div>
                     </div>
