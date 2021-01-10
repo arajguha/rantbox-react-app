@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../../../store/auth/authActions'
+import background from './images/background-image.jpg'
 
 
 class Header extends Component {
@@ -36,6 +37,14 @@ class Header extends Component {
                 </nav>
 
                 <ul id="slide-out" className="sidenav" style={{ backgroundColor: '#f7f5f5' }}>
+                    <li>
+                        <div className="user-view">
+                            <div className="background">
+                                <img src={background} />
+                            </div>
+                            <h5><span className="brand-logo white-text"><strong>RantBox</strong></span></h5>
+                        </div>
+                    </li>
                     <li><NavLink to="/dashboard">Dashboard</NavLink></li>
                     { this.props.auth.isLoggedIn && <li><NavLink to="/my-rants">Your Space</NavLink></li> }
                     <li><NavLink to="/about">About</NavLink></li>
