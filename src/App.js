@@ -18,7 +18,7 @@ const App = () => {
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/"><Redirect to="/dashboard" /></Route>
+          <Route exact path="/"><Redirect to="/about" /></Route>
           <Route path="/dashboard"><Dashboard /></Route>
           <Route path="/signin"><SignIn /></Route>
           <Route path="/signup"><SignUp /></Route>
