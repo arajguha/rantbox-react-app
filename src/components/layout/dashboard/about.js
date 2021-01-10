@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSpring, animated } from 'react-spring'
+import Footer from '../footer/footer'
 
 
 const About = () => {
@@ -41,6 +42,7 @@ const About = () => {
 
                 </div>
             </div>
+            <Footer />
         </animated.div>
     )
 }
