@@ -45,6 +45,4 @@ const About = () => {
     )
 }
 
-//const About = animated(SimpleAbout)
-
 export default About
