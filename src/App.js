@@ -8,6 +8,7 @@ import About from './components/layout/dashboard/about'
 import CreatePost from './components/layout/posts/createPost'
 import PostDetail from './components/layout/posts/postDetail'
 import UserPosts from './components/layout/posts/userPosts'
+import EditPost from './components/layout/posts/editPost'
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/create-rant"><CreatePost /></Route>
           <Route path="/my-rants" component={UserPosts}></Route>
           <Route path="/post-detail/:id" component={PostDetail} ></Route>
+          <Route path="/edit-post/:id" component={EditPost} ></Route>
         </Switch>
       </Router>
     </div>

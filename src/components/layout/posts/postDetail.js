@@ -18,6 +18,7 @@ const PostDetail = (props) => {
     const [reacted, setReacted] = useState(false)
     const [reactorCount, setReactorCount] = useState(0)
     const [postDeleted, setPostDeleted] = useState(false)
+    const [editMode, setEditMode] = useState(false)
 
     
     useEffect( () => {
@@ -30,6 +31,12 @@ const PostDetail = (props) => {
         }
         return () => setErr('')
     }, [err])
+
+
+    useEffect( () => {
+        console.log('edit mode set')
+        
+    }, [editMode])
 
 
     useEffect(() => {
@@ -96,8 +103,15 @@ const PostDetail = (props) => {
         console.log(err)
     }
 
+    const handleEdit = () => {
+        setEditMode(true)
+    }
+
     if(postDeleted)
         return <Redirect to="/my-rants" />
+    
+    if(editMode)
+        return <Redirect to={`/edit-post/${props.match.params.id}`} />
 
 
     return (
@@ -108,6 +122,7 @@ const PostDetail = (props) => {
                 deleteHandler={handleDelete} 
                 deleteErrorHandler={deleteErrorHandler}
             />
+
             <AuthCheckerHoc>
                 { loading && <Loader type='linear' />}
                 <ToastContainer />
@@ -134,18 +149,31 @@ const PostDetail = (props) => {
                                     <p>{rantPost.text}</p>
                                 </div>
                                 <div className="card-action">
-                                    <button className="btn-small" onClick={handleReaction}>
-                                        <i className="material-icons left">thumb_up</i>{reacted ?  'Take Back Fuck' : 'Give a Fuck'}
-                                    </button>
                                     { props.auth.userid === rantPost.author &&
-                                        <button className="btn-small btn-floating modal-trigger red right"
-                                            data-target="modal1"
-                                        >
-                                            <i className="material-icons left">delete</i>Delete
-                                        </button>
-                                    }
-                             </div>
+                                        <div>
+                                            <button className="btn-small btn-floating modal-trigger red"
+                                                data-target="modal1"
+                                                style={{ margin: '5px' }}
+                                            >
+                                                <i className="material-icons left">delete</i>
+                                            </button>
+                                            
+                                            <button className="btn-small btn-floating"
+                                                style={{ margin: '5px' }}
+                                                onClick={handleEdit}
+                                            >
+                                                <i className="material-icons left">edit</i>
+                                            </button>
+
+                                        </div>
+                                    }    
+                                    
+                                </div>
+                                
                             </div>
+                            <button className="btn-small" onClick={handleReaction}>
+                                <i className="material-icons left">thumb_up</i>{reacted ?  'Take Back Fuck' : 'Give a Fuck'}
+                            </button>
                         </div>
                         <div className="col 4">
                             <p><strong>So far, {reactorCount} user(s) gave a fuck.</strong></p>
