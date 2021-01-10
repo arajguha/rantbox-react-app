@@ -10,3 +10,5 @@ export const feelingsDict = {
     'S': 'Sad',
     'VS': 'Very Sad'
 }
+
+export const maxBodyLength = 2000

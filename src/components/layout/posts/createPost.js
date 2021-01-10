@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { isEmpty } from '../../../utils/utils'
+import { isEmpty, maxBodyLength } from '../../../utils/utils'
 import { ToastContainer, toast } from 'react-toastify'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
@@ -68,6 +68,16 @@ const CreatePost = (props) => {
         setFeeling('')
     }
 
+    const handleBodyUpdate = e => {
+        if(e.target.value.length > maxBodyLength)
+            toast.error('Maximum Allowed Characters exceeded', {
+                position: "top-center",
+                autoClose: 2000,
+            })
+        
+        else setBody(e.target.value)
+    }
+
     if(!props.auth.isLoggedIn)
         return <Redirect to="/dashboard" />
 
@@ -96,10 +106,11 @@ const CreatePost = (props) => {
 
                             <div className="input-field col s12">
                                 <i className="material-icons prefix">keyboard</i>
-                                <label htmlFor="text">Body</label>
+                                <label htmlFor="text">Body (Max 2000 characters)</label>
                                 <textarea 
                                     id="text" className="materialize-textarea" 
-                                    value={body} onChange={e => setBody(e.target.value)}
+                                    value={body} onChange={handleBodyUpdate}
+                                    maxLength={maxBodyLength}
                                 ></textarea>
                             </div>
 
