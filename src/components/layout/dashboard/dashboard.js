@@ -5,6 +5,7 @@ import { fetchPosts } from '../../../store/posts/postActions'
 import { Link } from 'react-router-dom'
 import Loader from '../../generic/loader'
 import AnimatedHoc from '../../generic/AnimatedHoc'
+import 'materialize-css/dist/css/materialize.min.css'
 
 
 const Dashboard = (props) => {

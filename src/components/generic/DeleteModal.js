@@ -46,10 +46,10 @@ class DeleteModal extends Component {
             <p>Are you sure you want to delete?</p>
           </div>
           <div className="modal-footer">
-            <a className="modal-close  btn-flat" onClick={this.handleDelete.bind(this)}>
+            <a className="modal-close btn red " onClick={this.handleDelete.bind(this)}>
               Delete
             </a>
-            <a className="modal-close  btn-flat">
+            <a className="modal-close btn-flat">
               Cancel
             </a>
           </div>
