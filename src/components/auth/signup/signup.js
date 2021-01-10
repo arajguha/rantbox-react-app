@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
+import AnimatedHoc from '../../generic/AnimatedHoc'
 
 
 const SignUp = () => {
@@ -67,7 +68,7 @@ const SignUp = () => {
     }
 
     return (
-        <>
+        <AnimatedHoc>
             <ToastContainer />
             <div className="container" style={{marginTop: '50px'}}>
                 <div className="row">
@@ -115,7 +116,7 @@ const SignUp = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </AnimatedHoc>
     )
 }
 

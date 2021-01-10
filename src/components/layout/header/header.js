@@ -35,7 +35,7 @@ class Header extends Component {
                     </div>
                 </nav>
 
-                <ul id="slide-out" className="sidenav">
+                <ul id="slide-out" className="sidenav" style={{ backgroundColor: '#f7f5f5' }}>
                     <li><NavLink to="/dashboard">Dashboard</NavLink></li>
                     { this.props.auth.isLoggedIn && <li><NavLink to="/my-rants">Your Space</NavLink></li> }
                     <li><NavLink to="/about">About</NavLink></li>

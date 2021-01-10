@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { fetchPosts } from '../../../store/posts/postActions'
 import { Link } from 'react-router-dom'
 import Loader from '../../generic/loader'
+import AnimatedHoc from '../../generic/AnimatedHoc'
 
 
 const Dashboard = (props) => {
@@ -28,15 +29,17 @@ const Dashboard = (props) => {
 
     if(!props.auth.isLoggedIn) {
         return ( 
-            <div className="container">
-                <InfoCard title="Log In Required" text="Please log in to continue. If you are new you can sign up." /> 
-            </div>
+            <AnimatedHoc>
+                <div className="container">
+                    <InfoCard title="Log In Required" text="Please log in to continue. If you are new you can sign up." /> 
+                </div>
+            </AnimatedHoc>
         )
     }    
 
     const postsArray = posts.map(post => <PostCard key={post.id} id={post.id} title={post.title} text={post.text} userid={post.author} />)
     return (
-        <>  
+        <AnimatedHoc>  
             <div className="row">
                 <div className="col s12">
                     <div className="card">
@@ -76,7 +79,7 @@ const Dashboard = (props) => {
                     </div>
                 </div>
             </div>
-        </>
+        </AnimatedHoc>
     )
 }
 

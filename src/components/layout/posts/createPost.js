@@ -7,6 +7,7 @@ import Loader from '../../generic/loader'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css'
+import AnimatedHoc from '../../generic/AnimatedHoc'
 
  
 const CreatePost = (props) => {
@@ -76,7 +77,7 @@ const CreatePost = (props) => {
     }
 
     return (
-        <>  
+        <AnimatedHoc>  
             { loading && <Loader type="linear" />}
             <ToastContainer />
             <div className="container" style={{'marginTop': '30px', 'marginBottom': '30px'}}>
@@ -129,7 +130,7 @@ const CreatePost = (props) => {
                     <i className="material-icons left">chevron_left</i>
                 </span>
             </div>
-        </>
+        </AnimatedHoc>
     )
 }
 

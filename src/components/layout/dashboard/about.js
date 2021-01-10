@@ -1,10 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSpring, animated } from 'react-spring'
 
 
 const About = () => {
+    const props = useSpring({  config: { duration: 350 }, opacity: 1, from: {opacity: 0} })
+
     return (
-        <div className="container">
+        <animated.div className="container" style={props} >
             <div className="row">
                 <div className="col s12">
                     <div className="card">
@@ -35,8 +38,10 @@ const About = () => {
 
                 </div>
             </div>
-        </div>
+        </animated.div>
     )
 }
+
+//const About = animated(SimpleAbout)
 
 export default About

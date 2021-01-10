@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { CSVLink } from "react-csv";
 import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css'
+import AnimatedHoc from '../../generic/AnimatedHoc'
 
 
 const UserPosts = (props) => {
@@ -104,7 +105,7 @@ const UserPosts = (props) => {
 
     const postsArray = posts.map(post => <PostCard key={post.id} id={post.id} title={post.title} text={post.text} userid={post.author}/>)
     return (
-        <>
+        <AnimatedHoc>
             <ToastContainer />
             <div className="row">
                 <div className="col s12">
@@ -156,7 +157,7 @@ const UserPosts = (props) => {
                     </div>
                 </div>
             </div>
-        </>
+        </AnimatedHoc>
     )
 }
 
