@@ -36,8 +36,8 @@ const SignIn = (props) => {
         
         <div className="container" style={{marginTop: '50px'}}>
             { props.auth.loading && <Loader type="linear" />}
-            <div className="col s2"></div>
-                <div className="col s8">
+            <div className="col s4"></div>
+                <div className="col s4">
                     <form>
                         <div className="input-field">
                             <label htmlFor="username">Username</label>
@@ -50,7 +50,7 @@ const SignIn = (props) => {
                         <button type="submit" className="btn btn-primary" onClick={e => loginHandler(e)}>Sign In</button>
                     </form>
                 </div>
-            <div className="col s2"></div>
+            <div className="col s4"></div>
             { message !== '' && <p style={{'color': 'red'}}><strong>{message}</strong></p> }
         </div>
     
