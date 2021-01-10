@@ -24,7 +24,7 @@ class Header extends Component {
                         <a href="#" className="brand-logo">RantBox</a>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-                            { this.props.auth.isLoggedIn && <li><NavLink to="/my-rants">Your Rants</NavLink></li> } 
+                            { this.props.auth.isLoggedIn && <li><NavLink to="/my-rants">Your Space</NavLink></li> } 
                             <li><NavLink to="/about">About</NavLink></li>
                             { !this.props.auth.isLoggedIn &&  <li><NavLink to="/signin">Sign In</NavLink></li> }
                             { !this.props.auth.isLoggedIn && <li><NavLink to="/signup">Sign up</NavLink></li> }
@@ -37,7 +37,7 @@ class Header extends Component {
 
                 <ul id="slide-out" className="sidenav">
                     <li><NavLink to="/dashboard">Dashboard</NavLink></li>
-                    { this.props.auth.isLoggedIn && <li><NavLink to="/my-rants">Your Rants</NavLink></li> }
+                    { this.props.auth.isLoggedIn && <li><NavLink to="/my-rants">Your Space</NavLink></li> }
                     <li><NavLink to="/about">About</NavLink></li>
                     { !this.props.auth.isLoggedIn &&  <li><NavLink to="/signin">Sign In</NavLink></li> }
                     { !this.props.auth.isLoggedIn && <li><NavLink to="/signup">Sign up</NavLink></li> }

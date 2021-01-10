@@ -106,6 +106,16 @@ const UserPosts = (props) => {
     return (
         <>
             <ToastContainer />
+            <div className="row">
+                <div className="col s12">
+                    <div className="card">
+                        <div className="card-content">
+                            <span className="card-title"><strong>Do you feel like ranting?</strong></span>
+                            <Link to="create-rant/"><strong>Create New Rant</strong></Link>
+                        </div>
+                    </div>
+                </div>
+             </div>
             { loading && <Loader type="linear" /> }
             <div className="row">
                 <div className="col s12 m6">
@@ -125,7 +135,7 @@ const UserPosts = (props) => {
                         </div>
                         <div className="card-action">
                             { !downloadReady && 
-                                <span className="waves-effect waves-light btn btn-small" onClick={generateReport}>
+                                <span className="btn btn-small" onClick={generateReport}>
                                     Generate Export
                                     <i className="material-icons left">file_download</i>
                                 </span>
@@ -135,7 +145,7 @@ const UserPosts = (props) => {
                                 <div>
                                 <p>Your Export is ready</p>
                                 <CSVLink data={csvData} filename={"myrants.csv"}>
-                                    <span className="waves-effect waves-light btn btn-small">Download
+                                    <span className="btn btn-small">Download
                                         <i className="material-icons left">file_download</i>
                                     </span>
                                 </CSVLink> 

@@ -54,17 +54,18 @@ const Dashboard = (props) => {
                             {/*<button className="btn btn-info waves-effect" onClick={() => props.getPosts(props.auth.token, prev)} disabled={!prev}>
                                     <i className="material-icons">chevron_left</i>
                             </button> */}
-                            <a className="waves-effect waves-light btn-small" 
+                            <button className="btn-small" 
                                 onClick={() => props.getPosts(props.auth.token, prev)}
                                 disabled={!prev}>
                                 <i className="material-icons">chevron_left</i>
-                            </a>
-                            <a className="waves-effect waves-light btn-small" 
+                            </button>
+                            <button className="btn-small" 
                                 onClick={() => props.getPosts(props.auth.token, next)}
                                 disabled={!next}>
                                 <i className="material-icons">chevron_right</i>
-                            </a>
+                            </button>
                     </ul>
+                    <h5 className="teal-text"><strong>See what others are ranting about</strong></h5>
                     { props.posts.loading && <Loader /> }
                     {postsArray}
                 </div>

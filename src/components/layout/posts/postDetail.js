@@ -134,11 +134,11 @@ const PostDetail = (props) => {
                                     <p>{rantPost.text}</p>
                                 </div>
                                 <div className="card-action">
-                                    <button className="waves-effect waves-light btn-small" onClick={handleReaction}>
+                                    <button className="btn-small" onClick={handleReaction}>
                                         <i className="material-icons left">thumb_up</i>{reacted ?  'Take Back Fuck' : 'Give a Fuck'}
                                     </button>
                                     { props.auth.userid === rantPost.author &&
-                                        <button className="waves-effect waves-light btn-small btn-floating modal-trigger red right"
+                                        <button className="btn-small btn-floating modal-trigger red right"
                                             data-target="modal1"
                                         >
                                             <i className="material-icons left">delete</i>Delete
