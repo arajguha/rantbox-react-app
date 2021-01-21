@@ -18,6 +18,20 @@ const CreatePost = (props) => {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const [created, setCreated] = useState(false)
+    const [feelingOptions, setFeelingOptions] = useState([])
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:8000/rant-posts/feelings/', {
+                'headers': { 'Authorization': `Token ${props.auth.token}` }
+            })
+            .then(res => {
+                setFeelingOptions(res.data)
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }, [])
  
     useEffect(() => {
         if(!isEmpty(message))
@@ -86,6 +100,9 @@ const CreatePost = (props) => {
         return <Redirect to="/my-rants" />
     }
 
+    const options = feelingOptions.map(item => <option key={item[0]} value={item[0]}>{item[1]}</option>)
+    
+
     return (
         <AnimatedHoc>  
             { loading && <Loader type="linear" />}
@@ -120,13 +137,8 @@ const CreatePost = (props) => {
                             <label className="card-title"><strong>How are you feeling?</strong></label>
                             <div className="input-field col s12">
                                 <select className="browser-default" value={feeling} onChange={(e) => setFeeling(e.target.value)} >
-                                    <option value="" disabled>Choose</option>
-                                    <option value="VS">Very Sad</option>
-                                    <option value="S">Sad</option>
-                                    <option value="N">Neutral</option>
-                                    <option value="P">Pissed</option>
-                                    <option value="EP">Extremely Pissed</option>
-                                    <option value="FF">Fucking Furious</option>
+                                <option value="" disabled>Choose</option>
+                                    {options}
                                 </select>
                             </div>
                         </div>
