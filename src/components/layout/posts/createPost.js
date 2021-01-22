@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Loader from '../../generic/loader'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
+import { instance as axios } from '../../../api/rantbox.instance'
 import 'react-toastify/dist/ReactToastify.css'
 import AnimatedHoc from '../../generic/AnimatedHoc'
 
@@ -22,7 +22,7 @@ const CreatePost = (props) => {
 
     useEffect(() => {
         axios
-            .get('http://localhost:8000/rant-posts/feelings/', {
+            .get('/rant-posts/feelings/', {
                 'headers': { 'Authorization': `Token ${props.auth.token}` }
             })
             .then(res => {
@@ -63,7 +63,7 @@ const CreatePost = (props) => {
         
         setLoading(true)
         axios
-            .post('http://localhost:8000/rant-posts/', postData, {
+            .post('/rant-posts/', postData, {
                 'headers': { 'Authorization': `Token ${props.auth.token}` }
             })
             .then(res => {

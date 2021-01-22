@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import M from 'materialize-css'
 import 'materialize-css/dist/css/materialize.min.css'
-import axios from 'axios'
+import { instance as axios } from '../../api/rantbox.instance'
 
 
 class DeleteModal extends Component {
@@ -27,7 +27,7 @@ class DeleteModal extends Component {
   handleDelete() {
     console.log(`post with id ${this.props.postid} deleted`)
     axios
-      .delete(`http://localhost:8000/rant-posts/${this.props.postid}/`, {
+      .delete(`/rant-posts/${this.props.postid}/`, {
         'headers': { 'Authorization': `Token ${this.props.token}`}
       })
       .then( () => this.props.deleteHandler())

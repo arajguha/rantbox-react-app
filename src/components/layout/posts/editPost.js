@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Loader from '../../generic/loader'
 import { useHistory } from 'react-router-dom'
-import axios from 'axios'
+import { instance as axios } from '../../../api/rantbox.instance'
 import 'react-toastify/dist/ReactToastify.css'
 import AnimatedHoc from '../../generic/AnimatedHoc'
 
@@ -36,7 +36,7 @@ const EditPost = (props) => {
         
             setLoading(true)
             axios
-                .get(`http://localhost:8000/rant-posts/${props.match.params.id}/`, {
+                .get(`/rant-posts/${props.match.params.id}/`, {
                     'headers': { 'Authorization': `Token ${props.auth.token}` }
                 })
                 .then(res => {
@@ -77,7 +77,7 @@ const EditPost = (props) => {
         console.log(patchData)
         
         axios
-            .patch(`http://localhost:8000/rant-posts/${props.match.params.id}/`, patchData, {
+            .patch(`/rant-posts/${props.match.params.id}/`, patchData, {
                 'headers': { 'Authorization': `Token ${props.auth.token}` }
             })
             .then((res) => {

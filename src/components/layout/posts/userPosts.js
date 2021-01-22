@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { useHistory, Link, Redirect } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import { CSVLink } from "react-csv";
-import axios from 'axios'
+import { instance as axios } from '../../../api/rantbox.instance'
 import 'react-toastify/dist/ReactToastify.css'
 import AnimatedHoc from '../../generic/AnimatedHoc'
 
@@ -39,7 +39,7 @@ const UserPosts = (props) => {
         
             setLoading(true)
             axios
-                .get('http://localhost:8000/rant-posts/my-rants/', {
+                .get('/rant-posts/my-rants/', {
                     'headers': { 'Authorization': `Token ${props.auth.token}`}
                 })
                 .then((res) => {
@@ -65,7 +65,7 @@ const UserPosts = (props) => {
     const generateReport = () => {
         setGenerating(true)
         axios
-            .get('http://localhost:8000/generate-report/json/', {
+            .get('/generate-report/json/', {
                 'headers': { 'Authorization': `Token ${props.auth.token}`}
             })
             .then((res) => {

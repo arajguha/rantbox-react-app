@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import Loader from '../../generic/loader'
 import { connect } from 'react-redux'
-import axios from 'axios'
+import { instance as axios } from '../../../api/rantbox.instance'
 import { ToastContainer, toast } from 'react-toastify'
 import { feelingsDict } from '../../../utils/utils'
 import { Redirect, useHistory } from 'react-router-dom'
@@ -19,7 +19,25 @@ const PostDetail = (props) => {
     const [reactorCount, setReactorCount] = useState(0)
     const [postDeleted, setPostDeleted] = useState(false)
     const [editMode, setEditMode] = useState(false)
+    const [feelingsDict, setFeelingsDict] = useState(new Map())
 
+
+    useEffect(() => {
+        axios
+            .get('rant-posts/feelings/', {
+                'headers': { 'Authorization': `Token ${props.auth.token}` }
+            })
+            .then(res => {
+                const map = new Map()
+                for(let tuple of res.data) 
+                    map.set(tuple[0], tuple[1])
+                
+                setFeelingsDict(map)
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }, [])
     
     useEffect( () => {
         if(err !== '') {
@@ -41,8 +59,6 @@ const PostDetail = (props) => {
 
     useEffect(() => {
         if(props.auth.isLoggedIn) {
-            //console.log(props.auth)
-        
             setLoading(true)
             axios
                 .get(`http://localhost:8000/rant-posts/${props.match.params.id}/`, {
@@ -142,7 +158,7 @@ const PostDetail = (props) => {
                                         </div>
                                     </div>
                                     <div className="chip">
-                                        {feelingsDict[rantPost.feeling_level]}
+                                        {feelingsDict.get(rantPost.feeling_level)}
                                     </div>
                                 </div>
                                 <div className="card-content">
